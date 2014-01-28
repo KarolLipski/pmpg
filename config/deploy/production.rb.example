@@ -1,0 +1,2 @@
+set :deploy_to, "/home/karol/rails_project/sellit_prod"
+set :rails_env, 'production'

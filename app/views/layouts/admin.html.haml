@@ -1,0 +1,21 @@
+!!!
+%html{:lang => "en"}
+  = render 'layouts/admin/head'
+  %body
+    = render 'layouts/admin/navbar'
+    .container-fluid
+      .row-fluid
+        / left menu starts
+        = render 'layouts/admin/main_menu'
+        %noscript
+          .alert.alert-block.span10
+            %h4.alert-heading Warning!
+            %p
+              You need to have
+              %a{:href => "http://en.wikipedia.org/wiki/JavaScript", :target => "_blank"} JavaScript
+              enabled to use this site.
+        #content.span10
+          = render 'layouts/admin/flash'
+          = yield
+      %hr
+        = render 'layouts/admin/footer'

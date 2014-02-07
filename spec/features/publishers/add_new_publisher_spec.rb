@@ -13,9 +13,7 @@ feature "add new publisher" do
       Publisher.count should == 1
       PublisherAdress.where(type: 'company').count should == 1
       PublisherAdress.where(type: 'correspond').count should == 1
-      PublisherEmail.count should == 1
-      PublisherPhone.count should == 1
-      PublisherContactPerson.count should == 1
+      PublisherContact.count should == 1
     end  
   end
   context "with invalid data" do
@@ -27,9 +25,7 @@ feature "add new publisher" do
       Publisher.count should == 0
       PublisherAdress.where(type: 'company').count should == 0
       PublisherAdress.where(type: 'correspond').count should == 0
-      PublisherEmail.count should == 0
-      PublisherPhone.count should == 0
-      PublisherContactPerson.count should == 0
+      PublisherContact.count should == 0
     end
   end
 end

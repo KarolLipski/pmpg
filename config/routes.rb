@@ -1,4 +1,6 @@
 Pmpg::Application.routes.draw do
+  resources :publishers
+
   get "admin/index"
 
   root to: "admin#index"

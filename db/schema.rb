@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207224852) do
+ActiveRecord::Schema.define(version: 20140208120306) do
 
   create_table "publisher_addresses", force: true do |t|
     t.string   "company_name"
     t.string   "street"
     t.integer  "street_no"
     t.string   "postal_code"
-    t.string   "string"
     t.string   "city"
     t.string   "nip"
     t.string   "type"

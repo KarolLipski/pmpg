@@ -2,14 +2,13 @@
 
 FactoryGirl.define do
   factory :publisher_address do
-    company_name "MyString"
-    street "MyString"
-    street_no 1
-    postal_code "MyString"
-    string "MyString"
-    city "MyString"
-    nip "MyString"
-    type ""
-    publisher nil
+    company_name "Company Name"
+    street "Puławska"
+    street_no 24
+    postal_code "04-520"
+    city "Warszawa"
+    nip "123-123-22-34"
+    type "invoice"
+    association :publisher, factory: :publisher
   end
 end

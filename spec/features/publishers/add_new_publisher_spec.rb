@@ -10,10 +10,10 @@ feature "add new publisher" do
     end
     scenario "should add new Publisher and related data" do
       click_button 'Save'
-      Publisher.count should == 1
-      PublisherAdress.where(type: 'company').count should == 1
-      PublisherAdress.where(type: 'correspond').count should == 1
-      PublisherContact.count should == 1
+      Publisher.count.should == 1
+      PublisherAdress.where(type: 'company').count.should == 1
+      PublisherAdress.where(type: 'correspond').count.should == 1
+      PublisherContact.count.should == 1
     end  
   end
   context "with invalid data" do
@@ -22,10 +22,10 @@ feature "add new publisher" do
     end
     scenario "should not add Publisher and related data" do
       click_button 'Save'
-      Publisher.count should == 0
-      PublisherAdress.where(type: 'company').count should == 0
-      PublisherAdress.where(type: 'correspond').count should == 0
-      PublisherContact.count should == 0
+      Publisher.count.should == 0
+      PublisherAdress.where(type: 'company').count.should == 0
+      PublisherAdress.where(type: 'correspond').count.should == 0
+      PublisherContact.count.should == 0
     end
   end
 end

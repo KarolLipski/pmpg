@@ -1,5 +1,23 @@
 require 'spec_helper'
 
 describe PublisherAddress do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "has a valid factory" do
+    FactoryGirl.build(:publisher_address).should be_valid
+  end
+  it "is invalid without company_name" do FactoryGirl.build(:publisher_address, company_name: nil).should_not be_valid end
+  it "is invalid without street" do FactoryGirl.build(:publisher_address, street: nil).should_not be_valid end
+  it "is invalid without street_no" do FactoryGirl.build(:publisher_address, street_no: nil).should_not be_valid end
+  it "is invalid without postal_code" do FactoryGirl.build(:publisher_address, postal_code: nil).should_not be_valid end
+  it "is invalid without city" do FactoryGirl.build(:publisher_address, city: nil).should_not be_valid end
+  it "is invalid without nip" do FactoryGirl.build(:publisher_address, nip: nil).should_not be_valid end
+  it "is invalid without type" do FactoryGirl.build(:publisher_address, street: nil).should_not be_valid end
+  it "is invalid without publisher" do FactoryGirl.build(:publisher_address, publisher_id: nil).should_not be_valid end
+  it "nip should be numeric" do
+    FactoryGirl.build(:publisher_address, nip: '123-123-55-23').should be_valid
+    FactoryGirl.build(:publisher_address, nip: 'asd-123-55-23').should_not be_valid
+  end
+  it "postal_code should have proper format" do
+    FactoryGirl.build(:publisher_address, postal_code: '05-234').should be_valid
+    FactoryGirl.build(:publisher_address, nip: 'aa-234').should_not be_valid
+  end
 end

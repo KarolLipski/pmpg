@@ -9,9 +9,14 @@ describe PublisherAddress do
   it "is invalid without street_no" do FactoryGirl.build(:publisher_address, street_no: nil).should_not be_valid end
   it "is invalid without postal_code" do FactoryGirl.build(:publisher_address, postal_code: nil).should_not be_valid end
   it "is invalid without city" do FactoryGirl.build(:publisher_address, city: nil).should_not be_valid end
-  it "is invalid without nip" do FactoryGirl.build(:publisher_address, nip: nil).should_not be_valid end
-  it "is invalid without type" do FactoryGirl.build(:publisher_address, street: nil).should_not be_valid end
-  it "is invalid without publisher" do FactoryGirl.build(:publisher_address, publisher_id: nil).should_not be_valid end
+  it "is valid without nip when type is invoice" do 
+    FactoryGirl.build(:publisher_address, nip: nil, address_type: 'invoice').should_not be_valid 
+  end
+  it "nip can be blank when type is correspond" do 
+    FactoryGirl.build(:publisher_address, nip: nil, address_type: 'correspond').should be_valid 
+  end
+  it "is invalid without type" do FactoryGirl.build(:publisher_address, address_type: nil).should_not be_valid end
+  it "is invalid without publisher" do FactoryGirl.build(:publisher_address, publisher: nil).should_not be_valid end
   it "nip should be numeric" do
     FactoryGirl.build(:publisher_address, nip: '123-123-55-23').should be_valid
     FactoryGirl.build(:publisher_address, nip: 'asd-123-55-23').should_not be_valid

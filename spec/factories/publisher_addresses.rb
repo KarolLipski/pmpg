@@ -8,7 +8,7 @@ FactoryGirl.define do
     postal_code "04-520"
     city "Warszawa"
     nip "123-123-22-34"
-    type "invoice"
+    address_type "invoice"
     association :publisher, factory: :publisher
   end
 end

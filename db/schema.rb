@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208134148) do
+ActiveRecord::Schema.define(version: 20140208161743) do
 
   create_table "publisher_addresses", force: true do |t|
     t.string   "company_name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140208134148) do
     t.string   "postal_code"
     t.string   "city"
     t.string   "nip"
-    t.string   "type"
+    t.string   "address_type"
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"

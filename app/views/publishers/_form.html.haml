@@ -1,13 +1,27 @@
-= form_for @publisher do |f|
-  - if @publisher.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@publisher.errors.count, "error")} prohibited this publisher from being saved:"
-      %ul
-        - @publisher.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  = form_for @publisher do |f|
+    - if @publisher.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@publisher.errors.count, "error")} prohibited this publisher from being saved:"
+        %ul
+          - @publisher.errors.full_messages.each do |msg|
+            %li= msg
+    .span4
+      %p Invoice address
+      %hr
+      .field
+        = render 'invoice_address_fields', f: f
+    .span4
+      %p Forwarding address
+      %hr
+      .field
+        = render 'correspond_address_fields', f: f
+    .span3
+      %p Contact person
+      %hr
+      .field
+        = render 'contact_person_fields', f: f
+    %div{style:"clear:both"}
+    .actions
+      = f.submit 'Save'
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'

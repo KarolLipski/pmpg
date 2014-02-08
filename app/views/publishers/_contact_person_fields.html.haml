@@ -1,0 +1,7 @@
+= f.fields_for :contacts do |builder|
+  = builder.label :name
+  = builder.text_field :name, id: 'contact_name'
+  = builder.label :email
+  = builder.text_field :email, id: 'contact_email'
+  = builder.label :phone
+  = builder.text_field :phone, id: 'contact_phone'

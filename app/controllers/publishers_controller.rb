@@ -61,7 +61,7 @@ class PublishersController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def publisher_params
       params.require(:publisher).permit(:name, addresses_attributes: 
-        [:company_name, :street, :street_no, :postal_code, :city,
-        :nip, :address_type ], contacts_attributes: [:name, :email, :phone])
+        [:id,:company_name, :street, :street_no, :postal_code, :city,
+        :nip, :address_type ], contacts_attributes: [:id,:_destroy,:name, :email, :phone])
     end
 end

@@ -21,7 +21,9 @@
       %p Contact person
       %hr
       .field
-        = render 'contact_person_fields', f: f
+        = f.fields_for :contacts do |builder|
+          = render 'contact_fields', f: builder
+          = link_to_add_fields 'Add', f, :contacts
     %div{style:"clear:both"}
     .actions
       = f.submit 'Save'

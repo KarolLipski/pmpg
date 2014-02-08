@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208120306) do
+ActiveRecord::Schema.define(version: 20140208134148) do
 
   create_table "publisher_addresses", force: true do |t|
     t.string   "company_name"
@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20140208120306) do
   add_index "publisher_addresses", ["publisher_id"], name: "index_publisher_addresses_on_publisher_id"
 
   create_table "publisher_contacts", force: true do |t|
-    t.string   "contact_name"
-    t.string   "contact_email"
-    t.string   "contact_phone"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"

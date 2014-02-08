@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :publisher_contact do
-    contact_name "MyString"
-    contact_email "MyString"
-    contact_phone "MyString"
-    publisher nil
+    name "Jan Kowalski"
+    email "kowalski@gmail.com"
+    phone "888241205"
+    association :publisher , factory: :publisher
   end
 end

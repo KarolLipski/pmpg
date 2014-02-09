@@ -19,7 +19,7 @@
       .field
         = f.fields_for :contacts do |builder|
           = render 'contact_fields', f: builder
-          = link_to_add_fields 'add next contact', f, :contacts
+        = link_to_add_fields 'add next contact', f, :contacts
     %div{style:"clear:both"}
       = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-left:20px;margin-top:10px;'
 

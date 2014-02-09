@@ -75,9 +75,9 @@ describe PublishersController do
         assigns(:publisher).should be_persisted
       end
 
-      it "redirects to the created publisher" do
+      it "redirects to the publisher list" do
         post :create, {:publisher => valid_attributes}, valid_session
-        response.should redirect_to(Publisher.last)
+        response.should redirect_to(publishers_path)
       end
     end
 
@@ -119,7 +119,7 @@ describe PublishersController do
       it "redirects to the publisher" do
         publisher = Publisher.create! valid_attributes
         put :update, {:id => publisher.to_param, :publisher => valid_attributes}, valid_session
-        response.should redirect_to(publisher)
+        response.should redirect_to(publishers_path)
       end
     end
 

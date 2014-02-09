@@ -20,7 +20,7 @@ class PublishersController < AdminController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to @publisher, flash: { success: 'Publisher was successfully created.'} }
+        format.html { redirect_to publishers_path, flash: { success: 'Publisher was successfully created.'} }
         format.json { render action: 'show', status: :created, location: @publisher }
       else
         format.html do
@@ -35,7 +35,7 @@ class PublishersController < AdminController
   def update
     respond_to do |format|
       if @publisher.update(publisher_params)
-        format.html { redirect_to @publisher, flash: { success: 'Publisher was successfully updated.'} }
+        format.html { redirect_to publishers_path, flash: { success: 'Publisher was successfully updated.'} }
         format.json { head :no_content }
       else
         format.html do

@@ -1,4 +1,7 @@
 class Publisher < ActiveRecord::Base
+  
+  default_scope { includes :addresses, :contacts}
+
   before_validation :set_name
   validates_presence_of :name
   has_many :addresses, :class_name => "PublisherAddress", :dependent => :destroy, :inverse_of => :publisher

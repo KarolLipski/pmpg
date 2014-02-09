@@ -7,4 +7,10 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def error_for_field(object, property)
+    if object.errors[property.to_sym]
+      raw("<span class='error'>#{object.errors.full_messages_for(property.to_sym).first}</span>")
+    end
+  end
 end

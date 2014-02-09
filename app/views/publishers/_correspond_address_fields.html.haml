@@ -1,13 +1,18 @@
-= f.fields_for :addresses do |builder|
-  -if builder.object.address_type == 'correspond'
-    = builder.label :company_name 
-    = builder.text_field :company_name, id:'correspond_company_name'
-    = builder.label :street
-    = builder.text_field :street, id:'correspond_street'
-    = builder.label :street_no
-    = builder.text_field :street_no, id:'correspond_street_no'
-    = builder.label :postal_code
-    = builder.text_field :postal_code,id:'correspond_postal_code'
-    = builder.label :city
-    = builder.text_field :city,id:'correspond_city'
-    = builder.hidden_field :address_type
+%fieldset
+  -if f.object.address_type == 'correspond'
+    = f.label :company_name
+    = error_for_field(f.object, :company_name) 
+    = f.text_field :company_name, id:'correspond_company_name'
+    = f.label :street
+    = error_for_field(f.object, :street)
+    = f.text_field :street, id:'correspond_street'
+    = f.label :street_no
+    = error_for_field(f.object, :street_no)
+    = f.text_field :street_no, id:'correspond_street_no'
+    = f.label :postal_code
+    = error_for_field(f.object, :postal_code)
+    = f.text_field :postal_code,id:'correspond_postal_code'
+    = f.label :city
+    = error_for_field(f.object, :city)
+    = f.text_field :city,id:'correspond_city'
+    = f.hidden_field :address_type

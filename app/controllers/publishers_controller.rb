@@ -9,10 +9,7 @@ class PublishersController < AdminController
   end
 
   def new
-    @publisher = Publisher.new
-    @publisher.addresses.build(address_type: 'invoice')
-    @publisher.addresses.build(address_type: 'correspond')
-    @publisher.contacts.build
+    @publisher = publisher_with_addreses
   end
 
   def edit
@@ -23,10 +20,13 @@ class PublishersController < AdminController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to @publisher, notice: 'Publisher was successfully created.' }
+        format.html { redirect_to @publisher, flash: { success: 'Publisher was successfully created.'} }
         format.json { render action: 'show', status: :created, location: @publisher }
       else
-        format.html { render action: 'new' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'new'
+        end
         format.json { render json: @publisher.errors, status: :unprocessable_entity }
       end
     end
@@ -35,10 +35,13 @@ class PublishersController < AdminController
   def update
     respond_to do |format|
       if @publisher.update(publisher_params)
-        format.html { redirect_to @publisher, notice: 'Publisher was successfully updated.' }
+        format.html { redirect_to @publisher, flash: { success: 'Publisher was successfully updated.'} }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'edit'
+        end
         format.json { render json: @publisher.errors, status: :unprocessable_entity }
       end
     end
@@ -63,5 +66,13 @@ class PublishersController < AdminController
       params.require(:publisher).permit(:name, addresses_attributes: 
         [:id,:company_name, :street, :street_no, :postal_code, :city,
         :nip, :address_type ], contacts_attributes: [:id,:_destroy,:name, :email, :phone])
+    end
+
+    def publisher_with_addreses
+      publisher = Publisher.new
+      publisher.addresses.build(address_type: 'invoice')
+      publisher.addresses.build(address_type: 'correspond')
+      publisher.contacts.build
+      publisher
     end
 end

@@ -1,4 +1,7 @@
 class PublisherAddress < ActiveRecord::Base
+  scope :invoice, -> {where(address_type: 'invoice')}
+  scope :correspond, -> {where(address_type: 'correspond')}
+
   belongs_to :publisher
   validates_presence_of :company_name, :street, :street_no, :postal_code,
     :city, :address_type, :publisher

@@ -1,9 +1,17 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @publisher.name
+.row{style:'margin-left:20px;'}
+  .span4
+    %p Invoice address
+    %hr
+    = render @publisher.addresses.select{|address| address.address_type == 'invoice'}
+  .span4
+    %p Forwarding address
+    %hr
+    = render @publisher.addresses.select{|address| address.address_type == 'correspond'}
+  .span4
+    %p Contact people
+    %hr
+    = render @publisher.contacts
 
 = link_to 'Edit', edit_publisher_path(@publisher)
 \|
-= link_to 'Back', publishers_path
+= link_to 'Back to list', publishers_path

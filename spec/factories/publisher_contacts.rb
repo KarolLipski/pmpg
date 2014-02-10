@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :publisher_contact do
-    name "Jan Kowalski"
-    email "kowalski@gmail.com"
-    phone "888241205"
+    name {"#{Faker::Name.first_name} #{Faker::Name.last_name}"}
+    email {Faker::Internet.email}
+    phone {"#{rand(800)+100}-#{rand(800)+100}-#{rand(800)+100}"}
     association :publisher , factory: :publisher
   end
 end

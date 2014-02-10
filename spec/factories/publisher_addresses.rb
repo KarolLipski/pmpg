@@ -2,12 +2,12 @@
 
 FactoryGirl.define do
   factory :publisher_address do
-    company_name "Company Name"
-    street "Puławska"
-    street_no 24
-    postal_code "04-520"
-    city "Warszawa"
-    nip "123-123-22-34"
+    company_name {Faker::Company.name}
+    street {Faker::Address.street_name}
+    street_no {Faker::Address.building_number}
+    postal_code {"0#{rand(9)}-#{rand(600)+100}"}
+    city {Faker::Address.city}
+    nip {"#{rand(80)+100}-#{rand(80)+100}-#{rand(89)+10}-#{rand(89)+10}"}
     address_type "invoice"
     association :publisher, factory: :publisher
   end

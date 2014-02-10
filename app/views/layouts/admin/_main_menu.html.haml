@@ -1,17 +1,15 @@
 .span2.main-menu-span
   .well.nav-collapse.sidebar-nav
     %ul.nav.nav-tabs.nav-stacked.main-menu
-      %li.nav-header.hidden-tablet Main
+      %li.nav-header.hidden-tablet Main menu
       %li
-        = link_to root_path do
+        = link_to dashboard_path do
           %i.icon-home
           %span.hidden-tablet Dashboard
       %li
-        %a{:href => "login.html"}
-          %i.icon-lock
-          %span.hidden-tablet Login Page
-    %label#for-is-ajax.hidden-tablet{:for => "is-ajax"}
-      %input#is-ajax{:type => "checkbox"} Ajax on menu
+        %a{:href => publishers_path }
+          %i.icon-th
+          %span.hidden-tablet Publishers
   / /.well
 / /span
 / left menu ends

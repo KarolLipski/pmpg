@@ -1,7 +1,7 @@
 Pmpg::Application.routes.draw do
   resources :publishers
 
-  get "admin/index"
+  get "admin/index" ,as: 'dashboard'
 
   root to: "admin#index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -4,7 +4,7 @@ class IssuesController < AdminController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    @issues = Issue.includes(:publisher, :issue_frequency).all
   end
 
   # GET /issues/1
@@ -69,6 +69,6 @@ class IssuesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
-      params.require(:issue).permit(:title, :issue_frequency_id, :archive)
+      params.require(:issue).permit(:title, :issue_frequency_id, :archive, :publisher_id)
     end
 end

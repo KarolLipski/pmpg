@@ -12,7 +12,8 @@
     %th Actions
     - @issues.each do |issue|
       %tr
-        %td= issue.title
+        %td
+          = link_to issue.title, issue_path(issue) 
         %td= issue.publisher.name
         %td= issue.issue_frequency.name
         %td= issue_archive? issue

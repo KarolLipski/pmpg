@@ -1,15 +1,19 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @issue.title
-%p
-  %b Issue frequency:
-  = @issue.issue_frequency
-%p
-  %b Archive:
-  = @issue.archive
+.row{style:'margin-left:20px;'}
+  .span8
+    %h3 
+      = @issue.title
+    %hr
+    %p
+      %b Publisher:
+      = @issue.publisher.name
+    %p
+      %b Frequency:
+      = @issue.issue_frequency.name
+    %p
+      %b Archive / Actual:
+      = issue_archive? @issue
+    %br
 
 = link_to 'Edit', edit_issue_path(@issue)
 \|
-= link_to 'Back', issues_path
+= link_to 'Back to list', issues_path

@@ -28,10 +28,13 @@ class IssuesController < AdminController
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
+        format.html { redirect_to issues_path, flash: { success: 'Issue was successfully created.'} }
         format.json { render action: 'show', status: :created, location: @issue }
       else
-        format.html { render action: 'new' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'new'
+        end
         format.json { render json: @issue.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,13 @@ class IssuesController < AdminController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to issues_path, flash: { success: 'Issue was successfully created.'} }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'edit'
+        end
         format.json { render json: @issue.errors, status: :unprocessable_entity }
       end
     end

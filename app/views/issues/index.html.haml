@@ -1,0 +1,21 @@
+%h3 
+  Issues List
+  %a{href: new_issue_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+
+
+%div{class:'list-table'}
+  %table{class:'table table-bordered'}
+    %th Title
+    %th Publisher
+    %th Frequecy
+    %th Archive / Actual
+    %th Actions
+    - @issues.each do |issue|
+      %tr
+        %td= issue.name
+        %td Publisher
+        %td Frequency
+        %td= issue.archive
+        %td
+          = link_to 'Edit', edit_issue_path(issue), class: 'btn btn-mini btn-primary'
+          = link_to 'Delete', issue, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208161743) do
+ActiveRecord::Schema.define(version: 20140210224747) do
+
+  create_table "issue_frequencies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "issues", force: true do |t|
+    t.string   "title"
+    t.integer  "issue_frequency_id"
+    t.boolean  "archive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "publisher_id"
+  end
+
+  add_index "issues", ["issue_frequency_id"], name: "index_issues_on_issue_frequency_id"
+  add_index "issues", ["publisher_id"], name: "index_issues_on_publisher_id"
 
   create_table "publisher_addresses", force: true do |t|
     t.string   "company_name"

@@ -1,0 +1,24 @@
+%div{style:'margin-top:20px;'}
+  = form_for @issue do |f|
+    %fieldset
+      = f.label :title
+      = error_for_field(f.object, :title)
+      = f.text_field :title
+
+      = f.label :issue_frequency
+      = error_for_field(f.object, :issue_frequency)
+      = f.collection_select(:issue_frequency_id,IssueFrequency.order(:id),:id, :name)
+
+      = f.label :publisher
+      = error_for_field(f.object, :publisher)
+      = f.collection_select(:publisher_id,Publisher.order(:name),:id, :name)
+
+      %br
+      = f.label :archive, 'Archive', value: true ,:style => "display:inline"
+      = f.radio_button(:archive, true, checked: f.object.archive == true)
+      = f.label :archive, 'Actual', value: false ,:style => "display:inline"
+      = f.radio_button(:archive, false, checked: (f.object.archive == false) || !f.object.archive)
+      = error_for_field(f.object, :archive)
+
+    .actions
+      = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

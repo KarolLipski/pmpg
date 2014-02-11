@@ -10,7 +10,7 @@ module ApplicationHelper
 
   def error_for_field(object, property)
     if object.errors[property.to_sym]
-      raw("<span class='error'>#{object.errors.full_messages_for(property.to_sym).first}</span>")
+      raw("<div class='error'>#{object.errors.full_messages_for(property.to_sym).first}</div>")
     end
   end
 end

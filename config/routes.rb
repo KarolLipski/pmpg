@@ -1,4 +1,6 @@
 Pmpg::Application.routes.draw do
+  resources :issues
+
   resources :publishers
 
   get "admin/index" ,as: 'dashboard'

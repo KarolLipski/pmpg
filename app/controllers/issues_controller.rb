@@ -4,7 +4,12 @@ class IssuesController < AdminController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.includes(:publisher, :issue_frequency).all
+    if params[:publisher_id]
+      @publisher = Publisher.find(params[:publisher_id]) 
+      @issues = @publisher.issues
+    else
+      @issues = Issue.includes(:publisher, :issue_frequency).all
+    end
   end
 
   # GET /issues/1

@@ -1,6 +1,11 @@
-%h3 
-  Issues List
-  %a{href: new_issue_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+%h3
+  - if @publisher
+    = @publisher.name 
+    issues
+    %a{href: new_publisher_issue_path(@publisher), class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+  - else 
+    Issues List
+    %a{href: new_issue_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
 
 
 %div{class:'list-table'}

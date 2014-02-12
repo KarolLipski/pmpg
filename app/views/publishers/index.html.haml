@@ -17,4 +17,5 @@
         %td= publisher_contact_emails(publisher)
         %td
           = link_to 'Edit', edit_publisher_path(publisher), class: 'btn btn-mini btn-primary'
+          = link_to 'Issues', publisher_issues_path(publisher), class: 'btn btn-mini btn-primary'
           = link_to 'Delete', publisher, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

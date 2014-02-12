@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :issue do
-    title "MyString"
-    issue_frequency nil
-    archive ""
+    title "Title"
+    association :issue_frequency, factory: :issue_frequency 
+    archive false
+    association :publisher, factory: :publisher
   end
 end

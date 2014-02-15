@@ -12,6 +12,8 @@
       = f.label :publisher
       = error_for_field(f.object, :publisher)
       = f.collection_select(:publisher_id,Publisher.order(:name),:id, :name)
+      - if @redirect
+        = hidden_field_tag 'redirect', 'test'
 
       %br
       = f.label :archive, 'Archive', value: true ,:style => "display:inline"

@@ -8,7 +8,7 @@ class IssuesController < AdminController
       @publisher = Publisher.find(params[:publisher_id]) 
       @issues = @publisher.issues
     else
-      @issues = Issue.includes(:publisher, :issue_frequency).all
+      @issues = Issue.includes(:publisher, :issue_frequency)
     end
   end
 
@@ -19,7 +19,13 @@ class IssuesController < AdminController
 
   # GET /issues/new
   def new
-    @issue = Issue.new
+    if params[:publisher_id]
+      @publisher = Publisher.find(params[:publisher_id]) 
+      @issue = @publisher.issues.build
+      @redirect = 'test'
+    else
+      @issue = Issue.new
+    end
   end
 
   # GET /issues/1/edit
@@ -30,15 +36,21 @@ class IssuesController < AdminController
   # POST /issues.json
   def create
     @issue = Issue.new(issue_params)
-
+    @redirect = 'ddd' if params[:redirect].present?
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to issues_path, flash: { success: 'Issue was successfully created.'} }
+        format.html do
+          if params[:redirect].present?
+            redirect_to publisher_issues_path @issue.publisher
+          else
+            redirect_to issues_path
+          end
+        end
         format.json { render action: 'show', status: :created, location: @issue }
       else
         format.html do
           flash.now[:error] = 'You have errors in your form , check it.'
-          render action: 'new'
+          render 'new'
         end
         format.json { render json: @issue.errors, status: :unprocessable_entity }
       end

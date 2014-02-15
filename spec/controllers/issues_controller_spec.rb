@@ -159,16 +159,18 @@ describe IssuesController do
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      @issue = FactoryGirl.create(:issue)
+      request.env["HTTP_REFERER"] = issues_path
+    end
     it "destroys the requested issue" do
-      issue = FactoryGirl.create(:issue)
       expect {
-        delete :destroy, {:id => issue.to_param}
+        delete :destroy, {:id => @issue.to_param}
       }.to change(Issue, :count).by(-1)
     end
 
     it "redirects to the issues list" do
-      issue = FactoryGirl.create(:issue)      
-      delete :destroy, {:id => issue.to_param}
+      delete :destroy, {:id => @issue.to_param}
       response.should redirect_to(issues_url)
     end
   end

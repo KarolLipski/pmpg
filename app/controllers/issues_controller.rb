@@ -1,8 +1,6 @@
 class IssuesController < AdminController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
-  # GET /issues
-  # GET /issues.json
   def index
     if params[:publisher_id]
       @publisher = Publisher.find(params[:publisher_id]) 
@@ -12,35 +10,34 @@ class IssuesController < AdminController
     end
   end
 
-  # GET /issues/1
-  # GET /issues/1.json
   def show
   end
 
-  # GET /issues/new
   def new
     if params[:publisher_id]
       @publisher = Publisher.find(params[:publisher_id]) 
       @issue = @publisher.issues.build
-      @redirect = 'test'
+      @redirect_to_parent = true
     else
       @issue = Issue.new
     end
   end
 
-  # GET /issues/1/edit
   def edit
+    if params[:publisher_id].present?
+      @redirect_to_parent = true
+    end
   end
 
   # POST /issues
   # POST /issues.json
   def create
     @issue = Issue.new(issue_params)
-    @redirect = 'ddd' if params[:redirect].present?
+    @redirect_to_parent = true if params[:redirect_to_parent].present?
     respond_to do |format|
       if @issue.save
         format.html do
-          if params[:redirect].present?
+          if params[:redirect_to_parent].present?
             redirect_to publisher_issues_path @issue.publisher
           else
             redirect_to issues_path
@@ -60,9 +57,16 @@ class IssuesController < AdminController
   # PATCH/PUT /issues/1
   # PATCH/PUT /issues/1.json
   def update
+    @redirect_to_parent = true if params[:redirect_to_parent].present?
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to issues_path, flash: { success: 'Issue was successfully created.'} }
+        format.html do
+          if params[:redirect_to_parent].present?
+            redirect_to publisher_issues_path @issue.publisher
+          else
+            redirect_to issues_path
+          end
+        end
         format.json { head :no_content }
       else
         format.html do

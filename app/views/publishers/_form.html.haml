@@ -5,13 +5,13 @@
       %hr
       .field
         = f.fields_for :addresses do |builder|
-          = render 'invoice_address_fields', f: builder
+          = render 'addresses/invoice_address_fields', f: builder
     .span4
       %p Forwarding address
       %hr
       .field
         = f.fields_for :addresses do |builder|
-          = render 'correspond_address_fields', f: builder
+          = render 'addresses/correspond_address_fields', f: builder
       %button{id: 'copy_address', class:'btn btn-small btn-warning'} same like invoice
     .span3
       %p Contact person

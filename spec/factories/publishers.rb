@@ -6,11 +6,11 @@ FactoryGirl.define do
 
     factory :publisher_full do
       after(:create) do |publisher, evaluator|
-        FactoryGirl.create(:publisher_address,
-          address_type: 'invoice', publisher: publisher)
-        FactoryGirl.create(:publisher_address,
-          address_type: 'correspond', nip: nil, publisher: publisher)
-        FactoryGirl.create_list(:publisher_contact, 2, publisher: publisher)
+        FactoryGirl.create(:address,
+          address_type: 'invoice', addressable: publisher)
+        FactoryGirl.create(:address,
+          address_type: 'correspond', nip: nil, addressable: publisher)
+        FactoryGirl.create_list(:contact, 2, contactable: publisher)
       end
     end
   end

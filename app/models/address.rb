@@ -1,10 +1,10 @@
-class PublisherAddress < ActiveRecord::Base
+class Address < ActiveRecord::Base
   scope :invoice, -> {where(address_type: 'invoice')}
   scope :correspond, -> {where(address_type: 'correspond')}
 
-  belongs_to :publisher
+  belongs_to :addressable, polymorphic: true
   validates_presence_of :company_name, :street, :street_no, :postal_code,
-    :city, :address_type, :publisher
+    :city, :address_type
   validates_presence_of :nip ,if: "address_type == 'invoice'"
   validates_format_of :postal_code, with: /\A\d{2}-\d{3}\z/
   validate :nip_format,if: "address_type == 'invoice'"

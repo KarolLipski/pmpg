@@ -12,9 +12,9 @@ feature "add new publisher" do
       click_button 'Save'
       # save_and_open_page
       Publisher.count.should == 1
-      PublisherAddress.where(address_type: 'invoice').count.should == 1
-      PublisherAddress.where(address_type: 'correspond').count.should == 1
-      PublisherContact.count.should == 1
+      Address.where(address_type: 'invoice').count.should == 1
+      Address.where(address_type: 'correspond').count.should == 1
+      Contact.count.should == 1
     end  
   end
   context "with invalid data" do
@@ -24,9 +24,9 @@ feature "add new publisher" do
     scenario "should not add Publisher and related data" do
       click_button 'Save'
       Publisher.count.should == 0
-      PublisherAddress.where(address_type: 'invoice').count.should == 0
-      PublisherAddress.where(address_type: 'correspond').count.should == 0
-      PublisherContact.count.should == 0
+      Address.where(address_type: 'invoice').count.should == 0
+      Address.where(address_type: 'correspond').count.should == 0
+      Contact.count.should == 0
     end
   end
 end

@@ -1,38 +1,42 @@
 require 'spec_helper'
 
-feature "add new publisher" do
+feature "add new chain" do
   before(:each) do
-    visit new_publisher_path
+    visit new_chain_path
   end
   context "with valid data" do
-    before(:each) do
-      fill_publisher_fields
-    end
-    scenario "should add new Publisher and related data" do
+    scenario "should add new chain with all data" do
+      fill_chain_fields
       click_button 'Save'
-      # save_and_open_page
-      Publisher.count.should == 1
+      Chain.count.should == 1
       Address.where(address_type: 'invoice').count.should == 1
       Address.where(address_type: 'correspond').count.should == 1
       Contact.count.should == 1
-    end  
+    end
+    scenario "should add new chain with all data" do
+      fill_chain_fields
+      click_button 'Save'
+      Chain.count.should == 0
+      Address.where(address_type: 'invoice').count.should == 1
+      Address.where(address_type: 'correspond').count.should == 1
+      Contact.count.should == 1
+    end
   end
   context "with invalid data" do
-    before(:each) do
-      fill_publisher_fields(:fake)
-    end
-    scenario "should not add Publisher and related data" do
+    scenario "should not add sell point and related data" do
+      fill_chain_fields(:fake)
       click_button 'Save'
-      Publisher.count.should == 0
+      Chain.count.should == 0
       Address.count.should == 0
       Contact.count.should == 0
     end
-  end
+  end 
 end
 
-def fill_publisher_fields(fake = false)
+def fill_chain_fields(fake = false)
   company_name = fake ? '' : 'Firma krzak sp.z.oo'
 
+  fill_in 'name', with: 'point'
   fill_in 'company_full_name', with: company_name
   fill_in 'invoice_street', with: 'Puławska'
   fill_in 'invoice_street_no', with: '15'

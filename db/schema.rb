@@ -11,7 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210224747) do
+ActiveRecord::Schema.define(version: 20140221194606) do
+
+  create_table "addresses", force: true do |t|
+    t.string   "company_name"
+    t.string   "street"
+    t.integer  "street_no"
+    t.string   "postal_code"
+    t.string   "city"
+    t.string   "nip"
+    t.string   "address_type"
+    t.integer  "publisher_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+  end
+
+  add_index "addresses", ["publisher_id"], name: "index_addresses_on_publisher_id"
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "publisher_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "contactable_id"
+    t.string   "contactable_type"
+  end
+
+  add_index "contacts", ["publisher_id"], name: "index_contacts_on_publisher_id"
 
   create_table "issue_frequencies", force: true do |t|
     t.string   "name"
@@ -30,32 +60,6 @@ ActiveRecord::Schema.define(version: 20140210224747) do
 
   add_index "issues", ["issue_frequency_id"], name: "index_issues_on_issue_frequency_id"
   add_index "issues", ["publisher_id"], name: "index_issues_on_publisher_id"
-
-  create_table "publisher_addresses", force: true do |t|
-    t.string   "company_name"
-    t.string   "street"
-    t.integer  "street_no"
-    t.string   "postal_code"
-    t.string   "city"
-    t.string   "nip"
-    t.string   "address_type"
-    t.integer  "publisher_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "publisher_addresses", ["publisher_id"], name: "index_publisher_addresses_on_publisher_id"
-
-  create_table "publisher_contacts", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone"
-    t.integer  "publisher_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "publisher_contacts", ["publisher_id"], name: "index_publisher_contacts_on_publisher_id"
 
   create_table "publishers", force: true do |t|
     t.string   "name"

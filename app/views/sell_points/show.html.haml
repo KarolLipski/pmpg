@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @sell_point.name
+%p
+  %b Chain:
+  = @sell_point.chain
+
+= link_to 'Edit', edit_sell_point_path(@sell_point)
+\|
+= link_to 'Back', sell_points_path

@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :sell_point do
     name {Faker::Company.name}
-    association :chain, factory: chain
+    association :chain, factory: :chain
   end
 end
+

@@ -1,21 +1,16 @@
-%h1 Listing sell_points
+%h3 
+  Sell points List
+  %a{href: new_sell_point_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
 
-%table
-  %tr
+%div{class:'list-table'}
+  %table{class:'table table-bordered'}
     %th Name
-    %th Chain
-    %th
-    %th
-    %th
-
-  - @sell_points.each do |sell_point|
-    %tr
-      %td= sell_point.name
-      %td= sell_point.chain
-      %td= link_to 'Show', sell_point
-      %td= link_to 'Edit', edit_sell_point_path(sell_point)
-      %td= link_to 'Destroy', sell_point, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Sell point', new_sell_point_path
+    %th Actions
+    - @sell_points.each do |point|
+      %tr
+        %td
+          %a{href:sell_point_path(point)} 
+            = point.name
+        %td
+          = link_to 'Edit', edit_sell_point_path(point), class: 'btn btn-mini btn-primary'
+          = link_to 'Delete', point, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

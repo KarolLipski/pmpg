@@ -1,28 +1,20 @@
-class SellPointsController < ApplicationController
+class SellPointsController < AdminController
   before_action :set_sell_point, only: [:show, :edit, :update, :destroy]
 
-  # GET /sell_points
-  # GET /sell_points.json
   def index
     @sell_points = SellPoint.all
   end
 
-  # GET /sell_points/1
-  # GET /sell_points/1.json
   def show
   end
 
-  # GET /sell_points/new
   def new
     @sell_point = SellPoint.new
   end
 
-  # GET /sell_points/1/edit
   def edit
   end
 
-  # POST /sell_points
-  # POST /sell_points.json
   def create
     @sell_point = SellPoint.new(sell_point_params)
 
@@ -37,8 +29,6 @@ class SellPointsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sell_points/1
-  # PATCH/PUT /sell_points/1.json
   def update
     respond_to do |format|
       if @sell_point.update(sell_point_params)
@@ -51,8 +41,6 @@ class SellPointsController < ApplicationController
     end
   end
 
-  # DELETE /sell_points/1
-  # DELETE /sell_points/1.json
   def destroy
     @sell_point.destroy
     respond_to do |format|

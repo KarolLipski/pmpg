@@ -4,13 +4,14 @@
       = f.label :chained, 'Single', value: false, style: 'display:inline'
       = f.radio_button(:chained, false, checked: !f.object.chain)
       = f.label :chained, 'Chain', value: true, style: 'display:inline'
-      = f.radio_button(:chained, true, checked: f.object.chain)
+      = f.radio_button(:chained, true, checked: (f.object.chain != nil))
     .field
       = f.label :name
       = f.text_field :name, id: 'name'
+      = error_for_field(f.object, :name)
     .field
       = f.label :chain
-      = f.collection_select(:chain_id, Chain.order(:name), :id, :name)
+      = f.collection_select(:chain_id, Chain.order(:name), :id, :name, :include_blank => :true)
 
     .row{style: 'margin-top:20px; margin-left:6px;'}
       .span4

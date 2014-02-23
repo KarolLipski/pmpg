@@ -18,8 +18,9 @@ class SellPointsController < AdminController
   def create
     @sell_point = SellPoint.new(sell_point_params)
       if @sell_point.save
-        if params[:sell_point][:chained] == 'true' && !params[:sell_point][:chain_id]
+        if params[:sell_point][:chained] == 'true' && params[:sell_point][:chain_id] == ''
           @chain = Chain.new(name: @sell_point.name)
+          add_addresses_to_chain(@chain, params)
           @chain.save
           @sell_point.chain_id = @chain.id
           @sell_point.save
@@ -76,5 +77,13 @@ class SellPointsController < AdminController
       sell_point.addresses.build(address_type: 'delivery')
       sell_point.contacts.build
       sell_point
+    end
+
+    def add_addresses_to_chain(chain, params)
+      params[:sell_point][:addresses_attributes].each do | key, address|
+        if address[:address_type] == 'invoice' || address[:address_type] == 'correspond'
+          @chain.addresses << Address.new(address)
+        end
+      end
     end
 end

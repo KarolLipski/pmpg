@@ -11,8 +11,9 @@ feature "add new sell point" do
       click_button 'Save'
       SellPoint.count.should == 1
       Chain.count.should == 1
-      Address.where(address_type: 'invoice').count.should == 1
-      Address.where(address_type: 'correspond').count.should == 1
+      # should add address both to point and chain
+      Address.where(address_type: 'invoice').count.should == 2
+      Address.where(address_type: 'correspond').count.should == 2
       Address.where(address_type: 'delivery').count.should == 1
       Contact.count.should == 1
     end

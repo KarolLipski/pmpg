@@ -6,6 +6,26 @@ describe SellPointsController do
 
   let(:valid_session) { {} }
 
+  let(:address_attributes) { {"0"=>{"company_name"=>"Firma krzak sp.z.oo", 
+    "street"=>"Puławska", 
+    "street_no"=>"15", 
+    "postal_code"=>"05-520", 
+    "city"=>"Warszawa", 
+    "nip"=>"123-112-77-87", 
+    "address_type"=>"invoice"}, 
+    "4"=>{"company_name"=>"Krzak.pl", 
+    "street"=>"Puławska", 
+    "street_no"=>"puławska", 
+    "postal_code"=>"05-500", 
+    "city"=>"Puławska", 
+    "address_type"=>"correspond"}, 
+    "8"=>{"company_name"=>"Krzak.pl", 
+    "street"=>"Puławska", 
+    "street_no"=>"puławska", 
+    "postal_code"=>"05-500", 
+    "city"=>"Puławska", 
+    "address_type"=>"delivery"}}}
+
   describe "GET index" do
     it "assigns all sell_points as @sell_points" do
       sell_point = FactoryGirl.create(:sell_point)
@@ -50,24 +70,21 @@ describe SellPointsController do
       it "should assign sell point" do
         post :create, {:sell_point =>  {name: 'test',
               chained: 'true',
-              chain_id: nil }
+              chain_id: '',:addresses_attributes => address_attributes }
             }
         assigns(:sell_point).should be_a(SellPoint)
       end
       context "when chain is checked and not selected" do
-        it "should create new chain" do
-          expect {
-            post :create, {:sell_point =>  {name: 'test',
+        before(:each) do
+          post :create, {:sell_point =>  {name: 'test',
               chained: 'true',
-              chain_id: nil }
+              chain_id: '', :addresses_attributes => address_attributes }
             }
-          }.to change(Chain, :count).by(1)
+        end
+        it "should create new chain" do
+          Chain.count.should == 1
         end
         it "should update sell_point chain_id" do
-          post :create, {:sell_point => { name: 'test',
-              chained: 'true',
-              chain_id: nil }
-            }
           assigns(:sell_point).chain_id.should == Chain.first.id
         end
       end
@@ -76,7 +93,7 @@ describe SellPointsController do
           @chain = FactoryGirl.create(:chain, name: 'chain1')
           post :create, {:sell_point => { name: 'test',
               chained: 'true',
-              chain_id: @chain.id }
+              chain_id: @chain.id, :addresses_attributes => address_attributes }
           }
         end
         it "should not create new chain" do

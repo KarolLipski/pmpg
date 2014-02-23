@@ -47,21 +47,41 @@ describe SellPointsController do
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new SellPoint" do
-        expect {
-          post :create, {:sell_point => valid_attributes}, valid_session
-        }.to change(SellPoint, :count).by(1)
-      end
-
-      it "assigns a newly created sell_point as @sell_point" do
-        post :create, {:sell_point => valid_attributes}, valid_session
+      it "should assign sell point" do
+        post :create, {:sell_point =>  {name: 'test',
+              chained: 'true',
+              chain_id: nil }
+            }
         assigns(:sell_point).should be_a(SellPoint)
-        assigns(:sell_point).should be_persisted
       end
-
-      it "redirects to the created sell_point" do
-        post :create, {:sell_point => valid_attributes}, valid_session
-        response.should redirect_to(SellPoint.last)
+      context "when chain is checked and not selected" do
+        it "should create new chain" do
+          expect {
+            post :create, {:sell_point =>  {name: 'test',
+              chained: 'true',
+              chain_id: nil }
+            }
+          }.to change(Chain, :count).by(1)
+        end
+        it "should update sell_point chain_id" do
+          post :create, {:sell_point => { name: 'test',
+              chained: 'true',
+              chain_id: nil }
+            }
+          assigns(:sell_point).chain_id.should == Chain.first.id
+        end
+      end
+      context "when chain is checked and selected" do
+        before(:each) do
+          @chain = FactoryGirl.create(:chain, name: 'chain1')
+          post :create, {:sell_point => { name: 'test',
+              chained: 'true',
+              chain_id: @chain.id }
+          }
+        end
+        it "should not create new chain" do
+          Chain.count.should == 1
+        end
       end
     end
 
@@ -90,16 +110,28 @@ describe SellPointsController do
         put :update, {:id => sell_point.to_param, :sell_point => { "name" => "MyString" }}, valid_session
       end
 
+      context "when chained is set to false" do
+        it "chain_id is set to null" do
+          @chain = FactoryGirl.create(:chain, name: 'chain1')
+          @sell_point = FactoryGirl.create(:sell_point, chain_id: 1)
+          put :update, { id: @sell_point.to_param, :sell_point => {
+              chained: 'false',
+              chain_id: @chain.id }
+          }
+          assigns(:sell_point).chain_id.should == nil
+        end
+      end
+
       it "assigns the requested sell_point as @sell_point" do
         sell_point = SellPoint.create! valid_attributes
         put :update, {:id => sell_point.to_param, :sell_point => valid_attributes}, valid_session
         assigns(:sell_point).should eq(sell_point)
       end
 
-      it "redirects to the sell_point" do
+      it "redirects to the sell_points" do
         sell_point = SellPoint.create! valid_attributes
         put :update, {:id => sell_point.to_param, :sell_point => valid_attributes}, valid_session
-        response.should redirect_to(sell_point)
+        response.should redirect_to(sell_points_path)
       end
     end
 

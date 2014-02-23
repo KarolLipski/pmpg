@@ -17,25 +17,32 @@ class SellPointsController < AdminController
 
   def create
     @sell_point = SellPoint.new(sell_point_params)
-
-    respond_to do |format|
       if @sell_point.save
-        format.html { redirect_to @sell_point, notice: 'Sell point was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @sell_point }
+        if params[:sell_point][:chained] == 'true' && !params[:sell_point][:chain_id]
+          @chain = Chain.new(name: @sell_point.name)
+          @chain.save
+          @sell_point.chain_id = @chain.id
+          @sell_point.save
+        end
+        flash[:success] = 'Sell point was successfully created'
+        redirect_to sell_points_path
       else
-        format.html { render action: 'new' }
-        format.json { render json: @sell_point.errors, status: :unprocessable_entity }
+        flash.now[:error] = 'You have errors in your form, check it'
+        render action: 'new'
       end
-    end
   end
 
   def update
+    params[:sell_point][:chain_id] = nil if params[:sell_point][:chained] == 'false'
     respond_to do |format|
       if @sell_point.update(sell_point_params)
-        format.html { redirect_to @sell_point, notice: 'Sell point was successfully updated.' }
+        format.html { redirect_to sell_points_path, flash: { success: 'Sell point was successfully updated.'} }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'edit'
+        end
         format.json { render json: @sell_point.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +64,9 @@ class SellPointsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sell_point_params
-      params.require(:sell_point).permit(:name, :chain_id)
+      params.require(:sell_point).permit(:name, :chain_id, addresses_attributes: 
+        [:id,:company_name, :street, :street_no, :postal_code, :city,
+        :nip, :address_type ], contacts_attributes: [:id,:_destroy,:name, :email, :phone])
     end
 
     def sell_points_with_addresses

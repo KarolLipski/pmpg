@@ -7,7 +7,7 @@
       = f.radio_button(:chained, true, checked: f.object.chain)
     .field
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, id: 'name'
     .field
       = f.label :chain
       = f.collection_select(:chain_id, Chain.order(:name), :id, :name)

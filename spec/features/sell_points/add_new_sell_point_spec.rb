@@ -7,7 +7,7 @@ feature "add new sell point" do
   context "with valid data" do
     scenario "should add new multiple sellpoint with all data" do
       fill_point_fields
-      choose 'sell_point_type_multiple'
+      choose 'sell_point_chained_true'
       click_button 'Save'
       SellPoint.count.should == 1
       Chain.count.should == 1
@@ -18,7 +18,7 @@ feature "add new sell point" do
     end
     scenario "should add new single sellpoint with all data" do
       fill_point_fields
-      choose 'sell_point_type_single'
+      choose 'sell_point_chained_false'
       click_button 'Save'
       SellPoint.count.should == 1
       Chain.count.should == 0

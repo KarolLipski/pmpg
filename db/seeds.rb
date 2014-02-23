@@ -26,3 +26,10 @@ end
     @issue_frequencies[rand(9)], :publisher => publisher, 
     title: "title archival #{rand(200)}", archive: true)
 end
+
+# Sell points
+@chains = FactoryGirl.create_list(:chain_full, 5)
+@sell_points_without_chain = FactoryGirl.create_list(:sell_point_full, 5 , chain: nil)
+@chains.each do |chain|
+  FactoryGirl.create_list(:sell_point_full, 1, chain: chain)
+end

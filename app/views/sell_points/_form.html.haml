@@ -12,6 +12,7 @@
     .field
       = f.label :chain
       = f.collection_select(:chain_id, Chain.order(:name), :id, :name, :include_blank => :true)
+      %button{id: 'copy_address_from_chain', class:'btn btn-small btn-warning', style: 'margin-bottom:10px;'} copy address  
 
     .row{style: 'margin-top:20px; margin-left:6px;'}
       .span4

@@ -24,8 +24,16 @@ describe SellPointsController do
 
   describe "GET new" do
     it "assigns a new sell_point as @sell_point" do
-      get :new, {}, valid_session
+      get :new
       assigns(:sell_point).should be_a_new(SellPoint)
+    end
+    it "assigned sell_point should have 3 types of address" do
+      get :new
+      assigns(:sell_point).addresses.size.should == 3
+    end
+    it "assigned sell_point should have contact" do
+      get :new
+      assigns(:sell_point).contacts.size.should == 1
     end
   end
 

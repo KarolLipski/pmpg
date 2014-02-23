@@ -1,16 +1,43 @@
-= form_for @sell_point do |f|
-  - if @sell_point.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@sell_point.errors.count, "error")} prohibited this sell_point from being saved:"
-      %ul
-        - @sell_point.errors.full_messages.each do |msg|
-          %li= msg
+%div{style:'margin-top:20px;'}
+  = form_for @sell_point do |f|
+    = f.label :chained, 'Single', value: false, style: 'display:inline'
+    = f.radio_button(:chained, false, checked: !f.object.chain)
+    = f.label :chained, 'Chain', value: true, style: 'display:inline'
+    = f.radio_button(:chained, true, checked: f.object.chain)
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :chain
+      = f.collection_select(:chain_id, Chain.order(:name), :id, :name)
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :chain
-    = f.text_field :chain
-  .actions
-    = f.submit 'Save'
+    .row{style: 'margin-top:20px; margin-left:6px;'}
+      .span4
+        %p Invoice address
+        %hr
+        .field
+        = f.fields_for :addresses do |builder|
+          = render 'addresses/invoice_address_fields', f: builder
+      .span4
+        %p Forwarding address
+        %hr
+        .field
+          = f.fields_for :addresses do |builder|
+            = render 'addresses/correspond_address_fields', f: builder
+        %button{id: 'copy_address', class:'btn btn-small btn-warning'} same like invoice
+      .span3
+        %p Delivery address
+        %hr
+        .field
+          = f.fields_for :addresses do |builder|
+            = render 'addresses/delivery_address_fields', f: builder
+    .row{style: 'margin-top:20px; margin-left:6px;'}
+      .span12
+        %p Contact person
+        %hr
+        .field
+          = f.fields_for :contacts do |builder|
+            = render 'contact_fields', f: builder
+          = link_to_add_fields 'add next contact', f, :contacts
+    %div{style:"clear:both"}
+      = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

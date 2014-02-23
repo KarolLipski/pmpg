@@ -1,0 +1,14 @@
+.span3
+  %fieldset
+    = f.label :name
+    = error_for_field(f.object, :name)
+    = f.text_field :name, id: 'contact_name'
+    = f.label :email
+    = error_for_field(f.object, :email)
+    = f.text_field :email, id: 'contact_email'
+    = f.label :phone
+    = error_for_field(f.object, :phone)
+    = f.text_field :phone, id: 'contact_phone'
+    = f.hidden_field :_destroy
+    = link_to "remove","#", class: "remove_fields"
+    %hr

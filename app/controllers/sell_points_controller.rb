@@ -9,7 +9,7 @@ class SellPointsController < AdminController
   end
 
   def new
-    @sell_point = SellPoint.new
+    @sell_point = sell_points_with_addresses
   end
 
   def edit
@@ -58,5 +58,14 @@ class SellPointsController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sell_point_params
       params.require(:sell_point).permit(:name, :chain_id)
+    end
+
+    def sell_points_with_addresses
+      sell_point = SellPoint.new
+      sell_point.addresses.build(address_type: 'invoice')
+      sell_point.addresses.build(address_type: 'correspond')
+      sell_point.addresses.build(address_type: 'delivery')
+      sell_point.contacts.build
+      sell_point
     end
 end

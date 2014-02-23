@@ -1,0 +1,18 @@
+%fieldset
+  -if f.object.address_type == 'delivery'
+    = f.label :company_name
+    = error_for_field(f.object, :company_name) 
+    = f.text_field :company_name, id:'delivery_company_name'
+    = f.label :street
+    = error_for_field(f.object, :street)
+    = f.text_field :street, id:'delivery_street'
+    = f.label :street_no
+    = error_for_field(f.object, :street_no)
+    = f.text_field :street_no, id:'delivery_street_no'
+    = f.label :postal_code
+    = error_for_field(f.object, :postal_code)
+    = f.text_field :postal_code,id:'delivery_postal_code'
+    = f.label :city
+    = error_for_field(f.object, :city)
+    = f.text_field :city,id:'delivery_city'
+    = f.hidden_field :address_type

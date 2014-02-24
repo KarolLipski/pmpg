@@ -6,6 +6,17 @@ class SellPointsController < AdminController
   end
 
   def show
+    respond_to do |format|
+      format.json do
+        @addresses = {}
+        @sell_point.addresses.each do |ad|
+          @addresses[ad.address_type.to_sym] = ad  
+        end
+        json = {:sell_poin => @sell_point, :addresses => @addresses}.to_json
+        render json: json
+      end
+      format.html {}
+    end
   end
 
   def new

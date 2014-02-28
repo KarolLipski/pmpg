@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: sell_points
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  chain_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe SellPoint do

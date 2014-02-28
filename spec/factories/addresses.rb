@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id               :integer          not null, primary key
+#  company_name     :string(255)
+#  street           :string(255)
+#  street_no        :integer
+#  postal_code      :string(255)
+#  city             :string(255)
+#  nip              :string(255)
+#  address_type     :string(255)
+#  publisher_id     :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  addressable_id   :integer
+#  addressable_type :string(255)
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

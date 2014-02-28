@@ -11,6 +11,11 @@ group :development, :test do
   gem 'rvm-capistrano'
 end
 
+group :development do
+  gem "better_errors"
+  gem 'awesome_print'
+end
+
 group :test do
   gem 'selenium-webdriver', '~>2.39.0'
   gem 'capybara'

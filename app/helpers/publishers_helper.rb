@@ -1,4 +1,5 @@
 module PublishersHelper
+  
   def publisher_contact_emails(publisher)
     emails = publisher.contacts.map do |contact|
       contact.email

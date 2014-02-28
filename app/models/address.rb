@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
-  scope :invoice, -> {where(address_type: 'invoice')}
-  scope :correspond, -> {where(address_type: 'correspond')}
+  scope :invoice, -> { where(address_type: 'invoice') }
+  scope :correspond, -> { where(address_type: 'correspond') }
 
   belongs_to :addressable, polymorphic: true
   validates_presence_of :company_name, :street, :street_no, :postal_code,

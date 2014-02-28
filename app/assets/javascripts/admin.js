@@ -46,4 +46,5 @@
 //= require ../charisma/js/jquery.uploadify-3.1.min.js
 //= require ../charisma/js/jquery.history.js
 //= require ../charisma/js/charisma.js
+//= require addresses.js
 

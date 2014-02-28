@@ -10,16 +10,7 @@ class IssuesController < AdminController
       @issues = Issue.includes(:publisher, :issue_frequency)
     end
   end
-
-  def show
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
+  
   def create
     @issue = Issue.new(issue_params)
     @redirect_to_parent = true if params[:redirect_to_parent].present?
@@ -46,6 +37,15 @@ class IssuesController < AdminController
   def destroy
     @issue.destroy
     redirect_to(:back)
+  end
+
+  def show
+  end
+
+  def new
+  end
+
+  def edit
   end
 
   private

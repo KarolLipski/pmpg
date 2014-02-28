@@ -70,8 +70,9 @@ class PublishersController < AdminController
 
     def publisher_with_addreses
       publisher = Publisher.new
-      publisher.addresses.build(address_type: 'invoice')
-      publisher.addresses.build(address_type: 'correspond')
+      %w[invoice correspond].each do |type|
+        publisher.addresses.build(address_type: type)
+      end
       publisher.contacts.build
       publisher
     end

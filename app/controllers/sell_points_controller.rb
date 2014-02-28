@@ -8,11 +8,11 @@ class SellPointsController < AdminController
   def show
     respond_to do |format|
       format.json do
-        @addresses = {}
+        addresses = {}
         @sell_point.addresses.each do |ad|
-          @addresses[ad.address_type.to_sym] = ad  
+          addresses[ad.address_type.to_sym] = ad  
         end
-        json = {:sell_poin => @sell_point, :addresses => @addresses}.to_json
+        json = {:sell_point => @sell_point, :addresses => addresses}.to_json
         render json: json
       end
       format.html {}
@@ -20,7 +20,7 @@ class SellPointsController < AdminController
   end
 
   def new
-    @sell_point = sell_points_with_addresses
+    @sell_point = sell_point_with_addresses
   end
 
   def edit
@@ -30,10 +30,8 @@ class SellPointsController < AdminController
     @sell_point = SellPoint.new(sell_point_params)
       if @sell_point.save
         if params[:sell_point][:chained] == 'true' && params[:sell_point][:chain_id] == ''
-          @chain = Chain.new(name: @sell_point.name)
-          add_addresses_to_chain(@chain, params)
-          @chain.save
-          @sell_point.chain_id = @chain.id
+          chain = create_chain(@sell_point.name);
+          @sell_point.chain_id = chain.id
           @sell_point.save
         end
         flash[:success] = 'Sell point was successfully created'
@@ -81,20 +79,23 @@ class SellPointsController < AdminController
         :nip, :address_type ], contacts_attributes: [:id,:_destroy,:name, :email, :phone])
     end
 
-    def sell_points_with_addresses
+    def sell_point_with_addresses
       sell_point = SellPoint.new
-      sell_point.addresses.build(address_type: 'invoice')
-      sell_point.addresses.build(address_type: 'correspond')
-      sell_point.addresses.build(address_type: 'delivery')
+      %w[invoice correspond delivery].each do |type|
+        sell_point.addresses.build(address_type: type)
+      end
       sell_point.contacts.build
       sell_point
     end
 
-    def add_addresses_to_chain(chain, params)
+    def create_chain(name)
+      chain = Chain.new(name: name)
       params[:sell_point][:addresses_attributes].each do | key, address|
-        if address[:address_type] == 'invoice' || address[:address_type] == 'correspond'
-          @chain.addresses << Address.new(address)
+        if address[:address_type].in? %w[invoice correspond]
+          chain.addresses << Address.new(address)
         end
       end
+      chain.save
+      return chain
     end
 end

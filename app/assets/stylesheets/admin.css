@@ -11,4 +11,5 @@
  *
  *= require_tree ../charisma/css
  *= require admin/common
+ *= require dataTables/jquery.dataTables.bootstrap
  */

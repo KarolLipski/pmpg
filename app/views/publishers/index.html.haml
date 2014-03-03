@@ -3,19 +3,22 @@
   %a{href: new_publisher_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
 
 %div{class:'list-table'}
-  %table{class:'table table-bordered'}
-    %th Company
-    %th Contact phone
-    %th Contact email
-    %th Actions
-    - @publishers.each do |publisher|
+  %table{:id => 'publisher_list',class:'table table-bordered'}
+    %thead
       %tr
-        %td
-          %a{href:publisher_path(publisher)} 
-            = publisher.name
-        %td= publisher_contact_phones(publisher)
-        %td= publisher_contact_emails(publisher)
-        %td
-          = link_to 'Edit', edit_publisher_path(publisher), class: 'btn btn-mini btn-primary'
-          = link_to 'Issues', publisher_issues_path(publisher), class: 'btn btn-mini btn-primary'
-          = link_to 'Delete', publisher, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'
+        %th Company
+        %th Contact phone
+        %th Contact email
+        %th Actions
+    %tbody
+      - @publishers.each do |publisher|
+        %tr
+          %td
+            %a{href:publisher_path(publisher)} 
+              = publisher.name
+          %td= publisher_contact_phones(publisher)
+          %td= publisher_contact_emails(publisher)
+          %td
+            = link_to 'Edit', edit_publisher_path(publisher), class: 'btn btn-mini btn-primary'
+            = link_to 'Issues', publisher_issues_path(publisher), class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', publisher, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

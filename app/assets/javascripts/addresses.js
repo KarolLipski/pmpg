@@ -52,4 +52,6 @@ $(document).ready(function(){
     $('#invoice_nip').val(data.addresses.invoice.nip);
   }
 
+
+
 })

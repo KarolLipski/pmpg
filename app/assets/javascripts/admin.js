@@ -46,5 +46,8 @@
 //= require ../charisma/js/jquery.uploadify-3.1.min.js
 //= require ../charisma/js/jquery.history.js
 //= require ../charisma/js/charisma.js
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require addresses.js
+//= require tables.js
 

@@ -3,14 +3,17 @@
   %a{href: new_sell_point_path, class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
 
 %div{class:'list-table'}
-  %table{class:'table table-bordered'}
-    %th Name
-    %th Actions
-    - @sell_points.each do |point|
+  %table{class:'table table-bordered', id:'sell_points_list'}
+    %thead
       %tr
-        %td
-          %a{href:sell_point_path(point)} 
-            = point.name
-        %td
-          = link_to 'Edit', edit_sell_point_path(point), class: 'btn btn-mini btn-primary'
-          = link_to 'Delete', point, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'
+        %th Name
+        %th Actions
+    %tbody
+      - @sell_points.each do |point|
+        %tr
+          %td
+            %a{href:sell_point_path(point)} 
+              = point.name
+          %td
+            = link_to 'Edit', edit_sell_point_path(point), class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', point, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

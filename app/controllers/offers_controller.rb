@@ -24,7 +24,6 @@ class OffersController < AdminController
     @offer = Offer.new(offer_params)
 
     respond_to do |format|
-      add_issues
       if @offer.save
         format.html do
           redirect_to @offer, notice: 'Offer was successfully created.'
@@ -40,7 +39,6 @@ class OffersController < AdminController
   # PATCH/PUT /offers/1
   # PATCH/PUT /offers/1.json
   def update
-    add_issues
     respond_to do |format|
       if @offer.update(offer_params)
         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
@@ -70,17 +68,8 @@ class OffersController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:name, :description, :price)
+      params[:offer][:issue_ids] ||= []
+      params.require(:offer).permit(:name, :description, :price, :issue_ids => [])
     end
 
-    def add_issues
-      params[:offer][:issue_ids] ||= []
-      @offer.update_attributes(offer_params)
-      if @offer.valid?
-        @offer.issues.destroy_all
-      end
-        params[:offer][:issue_ids].each do |issue_id|
-          @offer.offer_issues.build(:issue_id => issue_id)
-        end
-    end
 end

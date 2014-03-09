@@ -26,7 +26,7 @@ describe OffersController do
 
   describe "GET new" do
     it "assigns a new offer as @offer" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:offer).should be_a_new(Offer)
     end
   end

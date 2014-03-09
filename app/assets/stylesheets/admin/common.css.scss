@@ -5,3 +5,18 @@
   width:800px;
   margin-top: 15px;
 }
+
+.checkbox_container {
+  display: inline-block;
+  vertical-align: -1px;
+  margin: 5px;
+  width: 600px;
+ }
+
+.checkbox_container .outside_checker{
+  float: left; width: 31%; margin-right: 1%
+ }
+
+ .checkbox_container .outside_checker label{
+  display:inline;
+ }

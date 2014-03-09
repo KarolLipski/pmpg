@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @offer.name
+%p
+  %b Description:
+  = @offer.description
+%p
+  %b Price:
+  = @offer.price
+
+= link_to 'Edit', edit_offer_path(@offer)
+\|
+= link_to 'Back', offers_path

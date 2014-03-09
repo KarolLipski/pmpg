@@ -1,0 +1,23 @@
+%h3
+  
+  Offer for points List
+  %a{href: url_for(action: 'new'), class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+
+
+%div{class:'list-table'}
+  %table{class:'table table-bordered', id: 'offer_list'}
+    %thead
+      %tr
+        %th Name
+        %th Price
+        %th Actions
+    %tbody
+      - @offers.each do |offer|
+        %tr
+          %td
+            = link_to offer.name, offers_path(offer) 
+          %td= offer.name
+          %td= offer.price
+          %td
+            = link_to 'Edit', {action: :edit, id: offer}, class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', offer, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

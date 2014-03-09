@@ -1,4 +1,6 @@
 Pmpg::Application.routes.draw do
+  resources :offers
+
   resources :sell_points
 
   resources :issues

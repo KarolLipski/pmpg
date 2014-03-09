@@ -3,21 +3,23 @@
     %fieldset
       = f.label :name
       = error_for_field(f.object, :name)
-      = f.text_field :name
+      = f.text_field :name, id: 'offer_name'
 
       = f.label :description
       = error_for_field(f.object, :description)
-      = f.text_area(:description, rows: 5, cols: 25)
+      = f.text_area(:description, rows: 5, cols: 25, id: 'offer_description')
 
       = f.label :price
       = error_for_field(f.object, :price)
-      = f.text_field :price
+      = f.text_field :price, id: 'offer_price'
     %p
       Titles
       %hr
     %div{class: 'checkbox_container'}
-      = f.collection_check_boxes :issues, Issue.order('title ASC'), :id, :title do |builder|
-        - content_tag(:div, :class => "outside_checker") { builder.check_box + builder.label }
+      - Issue.order('title ASC').each do |i|
+        %div{class: 'outside_checker'}
+          = check_box_tag :issue_ids, i.id, @offer.issues.include?(i), name: 'offer[issue_ids][]'
+          = label_tag :issue_ids, i.title
 
 
     .actions

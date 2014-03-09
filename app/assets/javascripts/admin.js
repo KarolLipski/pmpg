@@ -50,4 +50,5 @@
 //= require dataTables/jquery.dataTables.bootstrap
 //= require addresses.js
 //= require tables.js
+//= require common.js
 

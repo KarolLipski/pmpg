@@ -12,13 +12,15 @@
       = f.label :price
       = error_for_field(f.object, :price)
       = f.text_field :price, id: 'offer_price'
-    %p
+    %hr
+    %h3
       Titles
-      %hr
+      %button{id: 'check_all', class:'btn btn-mini btn-warning'} check all
+
     %div{class: 'checkbox_container'}
       - Issue.order('title ASC').each do |i|
         %div{class: 'outside_checker'}
-          = check_box_tag 'offer[issue_ids]', i.id, @offer.issues.include?(i), name: 'offer[issue_ids][]'
+          = check_box_tag 'offer[issue_ids]', i.id, @offer.issues.include?(i), name: 'offer[issue_ids][]', class: 'aa'
           = label_tag :issue_ids, i.title
 
 

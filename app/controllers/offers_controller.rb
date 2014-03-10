@@ -26,11 +26,15 @@ class OffersController < AdminController
     respond_to do |format|
       if @offer.save
         format.html do
-          redirect_to @offer, notice: 'Offer was successfully created.'
+          flash[:success] ='Offer was successfully created.'
+          redirect_to offers_path
         end
         format.json { render action: 'show', status: :created, location: @offer }
       else
-        format.html { render action: 'new' }
+        format.html do 
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'new'
+        end
         format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end
@@ -41,10 +45,16 @@ class OffersController < AdminController
   def update
     respond_to do |format|
       if @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+        format.html do 
+          flash[:success] ='Offer was successfully updated.'
+          redirect_to offers_path
+        end
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html do
+          flash.now[:error] = 'You have errors in your form , check it.'
+          render action: 'edit'
+        end
         format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end

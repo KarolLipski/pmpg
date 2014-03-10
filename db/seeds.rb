@@ -33,3 +33,13 @@ end
 @chains.each do |chain|
   FactoryGirl.create_list(:sell_point_full, 1, chain: chain)
 end
+
+#Sell Points Offers
+offer_names = %w[Standard Uroda Moto Dom Sport]
+offer_names.each do |name|
+  @offer = FactoryGirl.create(:offer, name: name)
+  3.times do
+    @offer.issues << @issues[rand(@issues.size)]
+    @offer.save
+  end 
+end

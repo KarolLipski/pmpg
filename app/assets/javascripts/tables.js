@@ -9,5 +9,8 @@ $(document).ready(function(){
   $('#sell_points_list').dataTable({
     "sPaginationType": "bootstrap"
   });
+  $('#offer_list').dataTable({
+    "sPaginationType": "bootstrap"
+  });
 
 });

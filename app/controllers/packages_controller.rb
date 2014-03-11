@@ -78,6 +78,7 @@ class PackagesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
+      params[:package][:sell_point_ids] ||=[]
       params.require(:package).permit(:name, :description, :price, :sell_point_ids => [])
     end
 end

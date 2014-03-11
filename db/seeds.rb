@@ -31,8 +31,9 @@ end
 @chains = FactoryGirl.create_list(:chain_full, 5)
 @sell_points_without_chain = FactoryGirl.create_list(:sell_point_full, 5 , chain: nil)
 @chains.each do |chain|
-  FactoryGirl.create_list(:sell_point_full, 1, chain: chain)
+  @sell_points_chained = FactoryGirl.create_list(:sell_point_full, 1, chain: chain)
 end
+@all_sell_points = @sell_points_without_chain.concat(@sell_points_chained)
 
 #Sell Points Offers
 offer_names = %w[Standard Uroda Moto Dom Sport]
@@ -42,4 +43,14 @@ offer_names.each do |name|
     @offer.issues << @issues[rand(@issues.size)]
     @offer.save
   end 
+end
+
+#Publisher offers (packages)
+package_names = %w[Restauracje SPA Hotele Galerie Muzea]
+package_names.each do |package|
+  @package = FactoryGirl.create(:package, name: package)
+  4.times do
+    @package.sell_points << @all_sell_points[rand(@all_sell_points.size)]
+    @package.save
+  end
 end

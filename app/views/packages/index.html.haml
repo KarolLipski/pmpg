@@ -1,0 +1,22 @@
+%h3
+  
+  Offer for publishers List
+  %a{href: url_for(action: 'new'), class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+
+
+%div{class:'list-table'}
+  %table{class:'table table-bordered', id: 'offer_list'}
+    %thead
+      %tr
+        %th Name
+        %th Price
+        %th Actions
+    %tbody
+      - @packages.each do |package|
+        %tr
+          %td
+            = link_to package.name, packages_path(package) 
+          %td= package.price
+          %td
+            = link_to 'Edit', {action: :edit, id: package}, class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', package, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

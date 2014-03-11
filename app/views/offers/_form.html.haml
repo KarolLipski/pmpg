@@ -20,7 +20,7 @@
     %div{class: 'checkbox_container'}
       - Issue.order('title ASC').each do |i|
         %div{class: 'outside_checker'}
-          = check_box_tag 'offer[issue_ids]', i.id, @offer.issues.include?(i), name: 'offer[issue_ids][]', class: 'aa'
+          = check_box_tag 'offer[issue_ids]', i.id, @offer.issues.include?(i), name: 'offer[issue_ids][]'
           = label_tag :issue_ids, i.title
 
 

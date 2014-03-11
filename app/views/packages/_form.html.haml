@@ -1,0 +1,28 @@
+%div{style:'margin-top:20px;'}
+  = form_for @package do |f|
+    %fieldset
+      = f.label :name
+      = error_for_field(f.object, :name)
+      = f.text_field :name, id: 'package_name'
+
+      = f.label :description
+      = error_for_field(f.object, :description)
+      = f.text_area(:description, rows: 5, cols: 25, id: 'package_description')
+
+      = f.label :price
+      = error_for_field(f.object, :price)
+      = f.text_field :price, id: 'package_price'
+    %hr
+    %h3
+      Sell Points
+      %button{id: 'check_all', class:'btn btn-mini btn-warning'} check all
+
+    %div{class: 'checkbox_container'}
+      - SellPoint.order('name ASC').each do |s|
+        %div{class: 'outside_checker_two_columns'}
+          = check_box_tag 'package[sell_point_ids]', s.id, @package.sell_points.include?(s), name: 'package[sell_point_ids][]'
+          = label_tag :sell_point_ids, s.name
+
+
+    .actions
+      = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308131942) do
+ActiveRecord::Schema.define(version: 20140310184215) do
 
   create_table "addresses", force: true do |t|
     t.string   "company_name"
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(version: 20140308131942) do
     t.datetime "updated_at"
   end
 
+  create_table "packages", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "publishers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -100,6 +108,16 @@ ActiveRecord::Schema.define(version: 20140308131942) do
 
   add_index "sell_point_offers", ["offer_id"], name: "index_sell_point_offers_on_offer_id"
   add_index "sell_point_offers", ["sell_point_id"], name: "index_sell_point_offers_on_sell_point_id"
+
+  create_table "sell_point_packages", force: true do |t|
+    t.integer  "sell_point_id"
+    t.integer  "package_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sell_point_packages", ["package_id"], name: "index_sell_point_packages_on_package_id"
+  add_index "sell_point_packages", ["sell_point_id"], name: "index_sell_point_packages_on_sell_point_id"
 
   create_table "sell_points", force: true do |t|
     t.string   "name"

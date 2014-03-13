@@ -2,10 +2,12 @@ require 'spec_helper'
 
 feature "add new sell point" do
   before(:each) do
+    @packages = FactoryGirl.create_list(:package, 2)
     visit new_sell_point_path
   end
   context "with valid data" do
     scenario "should add new multiple sellpoint with all data" do
+      # save_and_open_page
       fill_point_fields
       choose 'sell_point_chained_true'
       click_button 'Save'
@@ -15,6 +17,7 @@ feature "add new sell point" do
       Address.where(address_type: 'invoice').count.should == 2
       Address.where(address_type: 'correspond').count.should == 2
       Address.where(address_type: 'delivery').count.should == 1
+      SellPointPackage.count.should == 2
       Contact.count.should == 1
     end
     scenario "should add new single sellpoint with all data" do
@@ -26,6 +29,7 @@ feature "add new sell point" do
       Address.where(address_type: 'invoice').count.should == 1
       Address.where(address_type: 'correspond').count.should == 1
       Address.where(address_type: 'delivery').count.should == 1
+      SellPointPackage.count.should == 2
       Contact.count.should == 1
     end
   end
@@ -37,6 +41,7 @@ feature "add new sell point" do
       Chain.count.should == 0
       Address.count.should == 0
       Contact.count.should == 0
+      SellPointPackage.count.should == 0
     end
   end 
 end
@@ -64,4 +69,6 @@ def fill_point_fields(fake = false)
   fill_in 'contact_name', with: 'zenon słowik'
   fill_in 'contact_email', with: 'zenon@wp.pl'
   fill_in 'contact_phone', with: '48500234567'
+  select "#{@packages[0].name}", from: 'sell_point_package_ids'
+  select "#{@packages[1].name}", from: 'sell_point_package_ids'
 end

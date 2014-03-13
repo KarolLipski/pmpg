@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SellPointsController do
 
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", 'package_ids' =>[] } }
 
   let(:valid_session) { {} }
 
@@ -123,8 +123,8 @@ describe SellPointsController do
     describe "with valid params" do
       it "updates the requested sell_point" do
         sell_point = SellPoint.create! valid_attributes
-        SellPoint.any_instance.should_receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => sell_point.to_param, :sell_point => { "name" => "MyString" }}, valid_session
+        SellPoint.any_instance.should_receive(:update).with(valid_attributes)
+        put :update, {:id => sell_point.to_param, :sell_point => valid_attributes}, valid_session
       end
 
       context "when chained is set to false" do
@@ -157,7 +157,7 @@ describe SellPointsController do
         sell_point = SellPoint.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         SellPoint.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sell_point.to_param, :sell_point => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => sell_point.to_param, :sell_point => valid_attributes}, valid_session
         assigns(:sell_point).should eq(sell_point)
       end
 
@@ -165,7 +165,7 @@ describe SellPointsController do
         sell_point = SellPoint.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         SellPoint.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sell_point.to_param, :sell_point => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => sell_point.to_param, :sell_point => valid_attributes}, valid_session
         response.should render_template("edit")
       end
     end

@@ -21,6 +21,7 @@ class SellPointsController < AdminController
 
   def new
     @sell_point = sell_point_with_addresses
+    @sell_point.packages.build
   end
 
   def edit
@@ -74,7 +75,8 @@ class SellPointsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sell_point_params
-      params.require(:sell_point).permit(:name, :chain_id, addresses_attributes: 
+      params[:sell_point][:package_ids] ||=[]
+      params.require(:sell_point).permit(:name, :chain_id, :package_ids =>[], addresses_attributes: 
         [:id,:company_name, :street, :street_no, :postal_code, :city,
         :nip, :address_type ], contacts_attributes: [:id,:_destroy,:name, :email, :phone])
     end

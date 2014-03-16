@@ -3,7 +3,7 @@ $(document).ready(function(){
   $('#publisher_list').dataTable({
     "sPaginationType": "bootstrap"
   });
-  $('#titles_list').dataTable({
+  $('#title_list').dataTable({
     "sPaginationType": "bootstrap"
   });
   $('#sell_points_list').dataTable({

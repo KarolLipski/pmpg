@@ -4,12 +4,12 @@ require 'faker'
 
 #independent - dictionaries
 
-# Issue frequencies
+# Title frequencies
 freq = ['Dziennik', 'Tygodnik', 'Dwutygodnik', 'Miesięcznik', 'Dwumiesięcznik',
 'Kwartalnik', 'Półrocznik', 'Rocznik', 'Wydanie jednorazowe']
-@issue_frequencies = []
+@title_frequencies = []
 freq.each do |type|
-  @issue_frequencies.push FactoryGirl.create(:issue_frequency, name: type)
+  @title_frequencies.push FactoryGirl.create(:title_frequency, name: type)
 end
 
 ##########################################################################
@@ -17,13 +17,13 @@ end
 # Publishers
 @publishers = FactoryGirl.create_list(:publisher_full, 5)
 
-# issues 
-@issues = []
+# titles 
+@titles = []
 @publishers.each do |publisher|
-  @issues.push FactoryGirl.create(:issue, issue_frequency:
-    @issue_frequencies[rand(9)], :publisher => publisher, title: "title #{rand(200)}")
-  @issues.push FactoryGirl.create(:issue, issue_frequency:
-    @issue_frequencies[rand(9)], :publisher => publisher, 
+  @titles.push FactoryGirl.create(:title, title_frequency:
+    @title_frequencies[rand(9)], :publisher => publisher, title: "title #{rand(200)}")
+  @titles.push FactoryGirl.create(:title, title_frequency:
+    @title_frequencies[rand(9)], :publisher => publisher, 
     title: "title archival #{rand(200)}", archive: true)
 end
 
@@ -40,7 +40,7 @@ offer_names = %w[Standard Uroda Moto Dom Sport]
 offer_names.each do |name|
   @offer = FactoryGirl.create(:offer, name: name)
   3.times do
-    @offer.issues << @issues[rand(@issues.size)]
+    @offer.titles << @titles[rand(@titles.size)]
     @offer.save
   end 
 end

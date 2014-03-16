@@ -9,7 +9,11 @@
 #  updated_at :datetime
 #
 
-class OfferIssue < ActiveRecord::Base
-  belongs_to :offer
-  belongs_to :issue
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :offer_title do
+    association :offer, factory: :offer
+    association :title, factory: :title
+  end
 end

@@ -8,6 +8,6 @@
 #  updated_at :datetime
 #
 
-class IssueFrequency < ActiveRecord::Base
-  has_many :issues, :class_name => "Issue"
+class TitleFrequency < ActiveRecord::Base
+  has_many :titles, :class_name => "Title"
 end

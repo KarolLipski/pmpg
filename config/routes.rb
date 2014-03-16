@@ -5,10 +5,10 @@ Pmpg::Application.routes.draw do
 
   resources :sell_points
 
-  resources :issues
+  resources :titles
 
   resources :publishers do
-    resources :issues
+    resources :titles
   end
 
   get "admin/index" ,as: 'dashboard'

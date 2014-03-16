@@ -1,0 +1,26 @@
+%h3
+  
+  Title's List
+  %a{href: url_for(action: 'new'), class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
+
+
+%div{class:'list-table'}
+  %table{class:'table table-bordered', id: 'title_list'}
+    %thead
+      %tr
+        %th Title
+        %th Publisher
+        %th Frequecy
+        %th Archive / Actual
+        %th Actions
+    %tbody
+      - @titles.each do |title|
+        %tr
+          %td
+            = link_to title.title, title_path(title) 
+          %td= title.publisher.name
+          %td= title.title_frequency.name
+          %td= title_archive? title
+          %td
+            = link_to 'Edit', {action: :edit, id: title}, class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', title, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

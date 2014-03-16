@@ -49,33 +49,15 @@ ActiveRecord::Schema.define(version: 20140310184215) do
 
   add_index "contacts", ["publisher_id"], name: "index_contacts_on_publisher_id"
 
-  create_table "issue_frequencies", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "issues", force: true do |t|
-    t.string   "title"
-    t.integer  "issue_frequency_id"
-    t.boolean  "archive"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "publisher_id"
-  end
-
-  add_index "issues", ["issue_frequency_id"], name: "index_issues_on_issue_frequency_id"
-  add_index "issues", ["publisher_id"], name: "index_issues_on_publisher_id"
-
-  create_table "offer_issues", force: true do |t|
+  create_table "offer_titles", force: true do |t|
     t.integer  "offer_id"
-    t.integer  "issue_id"
+    t.integer  "title_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "offer_issues", ["issue_id"], name: "index_offer_issues_on_issue_id"
-  add_index "offer_issues", ["offer_id"], name: "index_offer_issues_on_offer_id"
+  add_index "offer_titles", ["offer_id"], name: "index_offer_titles_on_offer_id"
+  add_index "offer_titles", ["title_id"], name: "index_offer_titles_on_title_id"
 
   create_table "offers", force: true do |t|
     t.string   "name"
@@ -127,5 +109,23 @@ ActiveRecord::Schema.define(version: 20140310184215) do
   end
 
   add_index "sell_points", ["chain_id"], name: "index_sell_points_on_chain_id"
+
+  create_table "title_frequencies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "titles", force: true do |t|
+    t.string   "title"
+    t.integer  "title_frequency_id"
+    t.boolean  "archive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "publisher_id"
+  end
+
+  add_index "titles", ["publisher_id"], name: "index_titles_on_publisher_id"
+  add_index "titles", ["title_frequency_id"], name: "index_titles_on_title_frequency_id"
 
 end

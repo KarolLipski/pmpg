@@ -11,13 +11,10 @@
 #  publisher_id       :integer
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+class Title < ActiveRecord::Base
 
-FactoryGirl.define do
-  factory :issue do
-    title "Title"
-    association :issue_frequency, factory: :issue_frequency 
-    archive false
-    association :publisher, factory: :publisher
-  end
+  belongs_to :title_frequency
+  belongs_to :publisher
+  validates_presence_of :title, :title_frequency, :publisher
+
 end

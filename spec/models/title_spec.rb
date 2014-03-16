@@ -11,10 +11,7 @@
 #  publisher_id       :integer
 #
 
-class Issue < ActiveRecord::Base
+require 'spec_helper'
 
-  belongs_to :issue_frequency
-  belongs_to :publisher
-  validates_presence_of :title, :issue_frequency, :publisher
-
+describe Title do
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: issues
+# Table name: titles
 #
 #  id                 :integer          not null, primary key
 #  title              :string(255)
@@ -11,7 +11,13 @@
 #  publisher_id       :integer
 #
 
-require 'spec_helper'
+# Read about factories at https://github.com/thoughtbot/factory_girl
 
-describe Issue do
+FactoryGirl.define do
+  factory :title do
+    title "Title"
+    association :title_frequency, factory: :title_frequency 
+    archive false
+    association :publisher, factory: :publisher
+  end
 end

@@ -6,7 +6,7 @@ describe OffersController do
   let(:valid_attributes) { { "name" => "MyString", 
     "description" => "description",
     "price" => "10.23",
-    "issue_ids" => [] } }
+    "title_ids" => [] } }
 
 
   let(:valid_session) { {} }

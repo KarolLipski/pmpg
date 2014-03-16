@@ -1,17 +1,17 @@
 .row{style:'margin-left:20px;'}
   .span8
     %h3 
-      = @issue.title
+      = @title.title
     %hr
     %p
       %b Publisher:
-      = @issue.publisher.name
+      = @title.publisher.name
     %p
       %b Frequency:
-      = @issue.issue_frequency.name
+      = @title.title_frequency.name
     %p
       %b Archive / Actual:
-      = issue_archive? @issue
+      = title_archive? @title
     %br
 
 = link_to 'Back to list', :back

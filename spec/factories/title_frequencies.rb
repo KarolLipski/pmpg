@@ -1,10 +1,9 @@
 # == Schema Information
 #
-# Table name: offer_issues
+# Table name: issue_frequencies
 #
 #  id         :integer          not null, primary key
-#  offer_id   :integer
-#  issue_id   :integer
+#  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -12,8 +11,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :offer_issue do
-    association :offer, factory: :offer
-    association :issue, factory: :issue
+  factory :title_frequency do
+    name "dziennik"
   end
 end

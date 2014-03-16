@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "delete offer" do
+feature "delete package" do
   before(:each) do
     sell_points = FactoryGirl.create_list(:sell_point, 3)
     @package = FactoryGirl.create(:package)
@@ -8,7 +8,7 @@ feature "delete offer" do
       @package.sell_points << point
     end
   end
-  scenario "should delete offer and all offer issues" do
+  scenario "should delete package and all package sell points" do
     visit packages_path
     click_link 'Delete', match: :first
 

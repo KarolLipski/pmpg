@@ -11,7 +11,7 @@ class OffersController < AdminController
   # GET /offers/new
   def new
     @offer = Offer.new
-    @offer.issues.build
+    @offer.titles.build
   end
 
   # GET /offers/1/edit
@@ -78,8 +78,8 @@ class OffersController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params[:offer][:issue_ids] ||= []
-      params.require(:offer).permit(:name, :description, :price, :issue_ids => [])
+      params[:offer][:titles_ids] ||= []
+      params.require(:offer).permit(:name, :description, :price, :title_ids => [])
     end
 
 end

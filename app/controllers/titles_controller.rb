@@ -1,21 +1,21 @@
-class IssuesController < AdminController
+class TitlesController < AdminController
 
-  before_action :build_issue, only: [:new]
-  before_action :load_issue, only: [:show, :edit, :update, :destroy]
+  before_action :build_title, only: [:new]
+  before_action :load_title, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:publisher_id]
-      @issues = Publisher.find(params[:publisher_id]).issues
+      @titles = Publisher.find(params[:publisher_id]).titles
     else
-      @issues = Issue.includes(:publisher, :issue_frequency)
+      @titles = Title.includes(:publisher, :title_frequency)
     end
   end
   
   def create
-    @issue = Issue.new(issue_params)
+    @title = Title.new(title_params)
     @redirect_to_parent = true if params[:redirect_to_parent].present?
-      if @issue.save
-        flash[:success] = 'Issue was created'
+      if @title.save
+        flash[:success] = 'Title was created'
         redirect_to_index
       else
         flash.now[:error] = 'You have errors in your form , check it.'
@@ -25,8 +25,8 @@ class IssuesController < AdminController
 
   def update
     @redirect_to_parent = true if params[:redirect_to_parent].present?
-      if @issue.update(issue_params)
-        flash[:success] = 'Issue was updated'
+      if @title.update(title_params)
+        flash[:success] = 'Title was updated'
         redirect_to_index
       else
         flash.now[:error] = 'You have errors in your form , check it.'
@@ -35,7 +35,7 @@ class IssuesController < AdminController
   end
 
   def destroy
-    @issue.destroy
+    @title.destroy
     redirect_to(:back)
   end
 
@@ -50,37 +50,37 @@ class IssuesController < AdminController
 
   private
 
-    def issues 
+    def titles 
       if params[:publisher_id]
         @redirect_to_parent = true
-        Publisher.find(params[:publisher_id]).issues 
+        Publisher.find(params[:publisher_id]).titles 
       else
-         Issue
+         Title
       end
     end
 
-    def load_issue
-      @issue = issues.find(params[:id])
+    def load_title
+      @title = titles.find(params[:id])
     end
 
-    def build_issue
+    def build_title
       if params[:publisher_id]
         @redirect_to_parent = true
-        @issue = Publisher.find(params[:publisher_id]).issues.build 
+        @title = Publisher.find(params[:publisher_id]).titles.build 
       else
-        @issue = Issue.new
+        @title = Title.new
       end
     end
 
     def redirect_to_index
       if params[:redirect_to_parent].present?
-        redirect_to publisher_issues_path @issue.publisher
+        redirect_to publisher_titles_path @title.publisher
       else
-        redirect_to issues_path
+        redirect_to titles_path
       end
     end
 
-    def issue_params
-      params.require(:issue).permit(:title, :issue_frequency_id, :archive, :publisher_id)
+    def title_params
+      params.require(:title).permit(:title, :title_frequency_id, :archive, :publisher_id)
     end
 end

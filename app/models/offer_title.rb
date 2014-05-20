@@ -12,4 +12,5 @@
 class OfferTitle < ActiveRecord::Base
   belongs_to :offer
   belongs_to :title
+  validates_numericality_of :quantity, only_integer: true, greater_than: 0
 end

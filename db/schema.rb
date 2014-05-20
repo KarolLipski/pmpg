@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310184215) do
+ActiveRecord::Schema.define(version: 20140519222509) do
 
   create_table "addresses", force: true do |t|
     t.string   "company_name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140310184215) do
     t.integer  "title_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   add_index "offer_titles", ["offer_id"], name: "index_offer_titles_on_offer_id"

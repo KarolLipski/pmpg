@@ -11,11 +11,12 @@ class OffersController < AdminController
   # GET /offers/new
   def new
     @offer = Offer.new
-    @offer.titles.build
+    create_titles
   end
 
   # GET /offers/1/edit
   def edit
+    create_titles
   end
 
   # POST /offers
@@ -78,8 +79,17 @@ class OffersController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params[:offer][:titles_ids] ||= []
-      params.require(:offer).permit(:name, :description, :price, :title_ids => [])
+      params.require(:offer).permit(:name, :description, :price,
+      :offer_titles_attributes => [:id,:_destroy,:quantity, :title_id])
+    end
+
+    #Create titles for nested_attributes
+    def create_titles
+      Title.all.each do |obj|
+        if !@offer.title_ids.include?(obj.id)
+          @offer.offer_titles.build(title_id: obj.id)
+        end
+      end
     end
 
 end

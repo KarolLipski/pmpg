@@ -14,15 +14,18 @@
       = f.text_field :price, id: 'offer_price'
     %hr
     %h3
-      Titles
+      Titles and quantity
       %button{id: 'check_all', class:'btn btn-mini btn-warning'} check all
 
     %div{class: 'checkbox_container'}
-      - Title.order('title ASC').each do |t|
+      = f.fields_for :offer_titles do |ff|
         %div{class: 'outside_checker'}
-          = check_box_tag 'offer[title_ids]', t.id, @offer.titles.include?(t), name: 'offer[title_ids][]'
-          = label_tag :title_ids, t.title
-
+          = ff.check_box :_destroy, {checked: ff.object.persisted?},'0','1'
+          = ff.hidden_field :title_id
+          = ff.text_field :quantity, style:'width:25px'
+          = ff.label :quantity , ff.object.title.title
+          
+          
 
     .actions
       = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

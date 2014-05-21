@@ -5,7 +5,7 @@ feature "delete offer" do
     titles = FactoryGirl.create_list(:title, 3)
     @offer = FactoryGirl.create(:offer)
     titles.each do |title|
-      @offer.titles << title
+      @offer.offer_titles.create(title: title, quantity:5) 
     end
   end
   scenario "should delete offer and all offer titles" do

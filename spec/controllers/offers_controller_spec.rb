@@ -6,7 +6,13 @@ describe OffersController do
   let(:valid_attributes) { { "name" => "MyString", 
     "description" => "description",
     "price" => "10.23",
-    "title_ids" => [] } }
+    } }
+
+  let(:attributes_with_titles) { { "name" => "MyString", 
+    "description" => "description",
+    "price" => "10.23",
+    "offer_titles_attributes" => {"id"=> "1", "title_id"=> "1", "quantity"=> "5"}
+    } }
 
 
   let(:valid_session) { {} }
@@ -21,7 +27,7 @@ describe OffersController do
 
   describe "GET show" do
     it "assigns the requested offer as @offer" do
-      offer = Offer.create! valid_attributes
+      offer = FactoryGirl.create(:offer)
       get :show, {:id => offer.to_param}, valid_session
       assigns(:offer).should eq(offer)
     end

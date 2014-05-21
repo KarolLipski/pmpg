@@ -6,10 +6,11 @@ feature "add new offer" do
     visit new_offer_path
     fill_in 'offer_name', with:'offer_name'
     fill_in 'offer_description',with: 'description'
-    # find(:xpath, "//input[@value='#{titles[0].id}']").set(true)
+    check 'offer_offer_titles_attributes_0__destroy'
+    check 'offer_offer_titles_attributes_1__destroy'
     # find(:xpath, "//input[@value='#{titles[1].id}']").set(true)
-    fill_in "offer_title_#{titles[0].id}", with: '13'
-    fill_in "offer_title_#{titles[1].id}", with: '23'
+    fill_in "offer_offer_titles_attributes_0_quantity", with: '13'
+    fill_in "offer_offer_titles_attributes_1_quantity", with: '23'
   end
   scenario "with valid data" do
     fill_in 'offer_price',with: '10.23'

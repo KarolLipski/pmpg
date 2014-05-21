@@ -13,6 +13,7 @@
 
 FactoryGirl.define do
   factory :offer_title do
+    quantity 5
     association :offer, factory: :offer
     association :title, factory: :title
   end

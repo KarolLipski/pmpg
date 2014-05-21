@@ -7,8 +7,10 @@ feature "update offer" do
     visit edit_offer_path(@offer)
     fill_in 'offer_name', with:'offer_name'
     fill_in 'offer_description',with: 'description'
-    find(:xpath, "//input[@value='#{titles[0].id}']").set(true)
-    find(:xpath, "//input[@value='#{titles[1].id}']").set(true)
+    check 'offer_offer_titles_attributes_0__destroy'
+    check 'offer_offer_titles_attributes_1__destroy'
+    fill_in "offer_offer_titles_attributes_0_quantity", with: '13'
+    fill_in "offer_offer_titles_attributes_1_quantity", with: '23'
   end
   scenario "with valid data" do
     fill_in 'offer_price',with: '10.23'

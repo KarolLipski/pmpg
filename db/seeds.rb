@@ -40,7 +40,7 @@ offer_names = %w[Standard Uroda Moto Dom Sport]
 offer_names.each do |name|
   @offer = FactoryGirl.create(:offer, name: name)
   3.times do
-    @offer.titles << @titles[rand(@titles.size)]
+    @offer.offer_titles.create(title: @titles[rand(@titles.size)], quantity: rand(12) )
     @offer.save
   end 
 end

@@ -17,5 +17,12 @@ FactoryGirl.define do
     name {"Offer_#{rand(100)}"}
     description {"Offer Description #{rand(100)}"}
     price {"#{rand(100)+10}.#{rand(89)+10}"}
+
+    factory :offer_with_titles do
+      after(:create) do |offer, evaluator|
+        FactoryGirl.create(:offer_title, offer: offer)
+        FactoryGirl.create(:offer_title, offer: offer)
+      end
+    end
   end
 end

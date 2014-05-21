@@ -15,4 +15,7 @@ describe OfferTitle do
   it "has a valid factory" do
     FactoryGirl.build(:offer_title).should be_valid
   end
+  it "is invalid without quantity" do
+    FactoryGirl.build(:offer_title, quantity: nil).should_not be_valid
+  end
 end

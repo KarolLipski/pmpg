@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: issue_frequencies
+# Table name: title_frequencies
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)

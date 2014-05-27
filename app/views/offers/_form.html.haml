@@ -20,12 +20,10 @@
     %div{class: 'checkbox_container'}
       = f.fields_for :offer_titles do |ff|
         %div{class: 'outside_checker'}
-          = ff.check_box :_destroy, {checked: ff.object.persisted?},'0','1'
+          = ff.check_box :_destroy, {checked: ff.object.persisted? || ff.object.quantity != 0},'0','1'
           = ff.hidden_field :title_id
           = ff.text_field :quantity, style:'width:25px'
           = ff.label :quantity , ff.object.title.title
           
-          
-
     .actions
       = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

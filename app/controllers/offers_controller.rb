@@ -32,6 +32,7 @@ class OffersController < AdminController
         end
         format.json { render action: 'show', status: :created, location: @offer }
       else
+        create_titles
         format.html do 
           flash.now[:error] = 'You have errors in your form , check it.'
           render action: 'new'
@@ -52,6 +53,7 @@ class OffersController < AdminController
         end
         format.json { head :no_content }
       else
+        create_titles
         format.html do
           flash.now[:error] = 'You have errors in your form , check it.'
           render action: 'edit'
@@ -86,8 +88,16 @@ class OffersController < AdminController
     #Create titles for nested_attributes
     def create_titles
       Title.all.each do |obj|
-        if !@offer.title_ids.include?(obj.id)
-          @offer.offer_titles.build(title_id: obj.id)
+        if params[:offer].present?
+            selected_hash = params[:offer][:offer_titles_attributes].select {|k,v| v['title_id'] == obj.id.to_s}
+            hash_index = selected_hash.keys[0]
+          if params[:offer][:offer_titles_attributes][hash_index][:_destroy] == '1'
+            @offer.offer_titles.build(title_id: obj.id, quantity: 0)
+          end
+        else
+          if !@offer.title_ids.include?(obj.id)
+            @offer.offer_titles.build(title_id: obj.id, quantity: 0)
+          end
         end
       end
     end

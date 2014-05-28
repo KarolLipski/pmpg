@@ -3,7 +3,9 @@ Pmpg::Application.routes.draw do
 
   resources :offers
 
-  resources :sell_points
+  resources :sell_points do
+    resources :sell_point_offers, as: 'offers', path: 'offers'
+  end
 
   resources :titles
 

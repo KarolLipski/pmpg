@@ -1,0 +1,17 @@
+%h1 Listing sell_point_offers
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @sell_point_offers.each do |sell_point_offer|
+    %tr
+      %td= link_to 'Show', sell_point_offer
+      %td= link_to 'Edit', edit_sell_point_offer_path(sell_point_offer)
+      %td= link_to 'Destroy', sell_point_offer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sell point offer', new_sell_point_offer_path

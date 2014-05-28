@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519222509) do
+ActiveRecord::Schema.define(version: 20140528231125) do
+
+  create_table "additional_titles", force: true do |t|
+    t.integer  "sell_point_offer_id"
+    t.integer  "title_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "additional_titles", ["sell_point_offer_id"], name: "sell_point_offer_offer_id"
+  add_index "additional_titles", ["title_id"], name: "sell_point_offer_title"
 
   create_table "addresses", force: true do |t|
     t.string   "company_name"
@@ -87,6 +98,7 @@ ActiveRecord::Schema.define(version: 20140519222509) do
     t.integer  "sell_point_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price"
   end
 
   add_index "sell_point_offers", ["offer_id"], name: "index_sell_point_offers_on_offer_id"

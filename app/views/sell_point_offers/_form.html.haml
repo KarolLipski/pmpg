@@ -1,0 +1,10 @@
+= form_for @sell_point_offer do |f|
+  - if @sell_point_offer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sell_point_offer.errors.count, "error")} prohibited this sell_point_offer from being saved:"
+      %ul
+        - @sell_point_offer.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

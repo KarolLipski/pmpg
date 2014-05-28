@@ -12,4 +12,5 @@
 class SellPointOffer < ActiveRecord::Base
   belongs_to :offer
   belongs_to :sell_point
+  has_many :additional_titles
 end

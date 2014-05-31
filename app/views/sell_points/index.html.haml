@@ -17,3 +17,4 @@
           %td
             = link_to 'Edit', edit_sell_point_path(point), class: 'btn btn-mini btn-primary'
             = link_to 'Delete', point, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'
+            = link_to 'Offers', sell_point_offers_path(point), class: 'btn btn-mini btn-primary'

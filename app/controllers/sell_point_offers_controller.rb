@@ -1,10 +1,9 @@
-class SellPointOffersController < ApplicationController
+class SellPointOffersController < AdminController
   before_action :set_sell_point_offer, only: [:show, :edit, :update, :destroy]
 
-  # GET /sell_point_offers
-  # GET /sell_point_offers.json
   def index
-    @sell_point_offers = SellPointOffer.all
+    @sell_point = SellPoint.find(params[:sell_point_id])
+    @offers = @sell_point.sell_point_offers
   end
 
   # GET /sell_point_offers/1

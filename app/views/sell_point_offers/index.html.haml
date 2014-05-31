@@ -1,17 +1,29 @@
-%h1 Listing sell_point_offers
+%h3
+  
+  Offer's List for 
+  =@sell_point.name
+  
+  %a{href: url_for(action: 'new'), class:'btn btn-mini btn-success', style: 'margin-left:15px'} Create new
 
-%table
-  %tr
-    %th
-    %th
-    %th
 
-  - @sell_point_offers.each do |sell_point_offer|
-    %tr
-      %td= link_to 'Show', sell_point_offer
-      %td= link_to 'Edit', edit_sell_point_offer_path(sell_point_offer)
-      %td= link_to 'Destroy', sell_point_offer, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Sell point offer', new_sell_point_offer_path
+%div{class:'list-table'}
+  %table{class:'table table-bordered', id: 'title_list'}
+    %thead
+      %tr
+        %th Offer Name
+        %th Start Date
+        %th End Date
+        %th Titles Count
+        %th Price
+        %th Actions
+    %tbody
+      - @offers.each do |offer|
+        %tr 
+          %td= offer.offer.name
+          %td 2012
+          %td 2013
+          %td 3
+          %td 12.23
+          %td
+            = link_to 'Edit', {action: :edit, id: offer}, class: 'btn btn-mini btn-primary'
+            = link_to 'Delete', {action: :destroy, id: offer}, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

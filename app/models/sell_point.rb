@@ -20,7 +20,7 @@ class SellPoint < ActiveRecord::Base
   has_many :packages , :through => :sell_point_packages
   
   has_many :sell_point_offers, :dependent => :destroy
-  has_many :offer, :through => :sell_point_offers
+  has_many :offers, :through => :sell_point_offers
   has_many :additional_titles, :through => :sell_point_offers
 
   validates_presence_of :name

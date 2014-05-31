@@ -13,4 +13,7 @@ class SellPointOffer < ActiveRecord::Base
   belongs_to :offer
   belongs_to :sell_point
   has_many :additional_titles
+
+  validates_presence_of :start_date, :end_date, :price
+  validates_numericality_of :price
 end

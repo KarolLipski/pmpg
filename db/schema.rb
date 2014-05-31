@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528231125) do
+ActiveRecord::Schema.define(version: 20140531200122) do
 
   create_table "additional_titles", force: true do |t|
     t.integer  "sell_point_offer_id"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 20140528231125) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "price"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "sell_point_offers", ["offer_id"], name: "index_sell_point_offers_on_offer_id"

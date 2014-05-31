@@ -15,5 +15,8 @@ FactoryGirl.define do
   factory :sell_point_offer do
     association :offer, factory: :offer
     association :sell_point, factory: :sell_point
+    start_date '2012-01-01'
+    end_date '2015-01-01'
+    price '12.34'
   end
 end

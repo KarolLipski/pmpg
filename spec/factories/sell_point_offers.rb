@@ -15,8 +15,8 @@ FactoryGirl.define do
   factory :sell_point_offer do
     association :offer, factory: :offer
     association :sell_point, factory: :sell_point
-    start_date '2012-01-01'
-    end_date '2015-01-01'
-    price '12.34'
+    start_date {"#{rand(14)+2000}-#{rand(11)+1}-#{rand(30)+1}"}
+    end_date {"#{rand(14)+2000}-#{rand(11)+1}-#{rand(30)+1}"}
+    price {"#{rand(98)}.#{rand(98)}"}
   end
 end

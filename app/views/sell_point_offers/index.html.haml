@@ -20,10 +20,10 @@
       - @offers.each do |offer|
         %tr 
           %td= offer.offer.name
-          %td 2012
-          %td 2013
-          %td 3
-          %td 12.23
+          %td= offer.start_date
+          %td= offer.end_date
+          %td
+          %td= offer.price
           %td
             = link_to 'Edit', {action: :edit, id: offer}, class: 'btn btn-mini btn-primary'
             = link_to 'Delete', {action: :destroy, id: offer}, :method => :delete, data: { confirm: "Are you sure?" },class: 'btn btn-mini btn-danger'

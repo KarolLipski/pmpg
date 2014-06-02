@@ -1,8 +1,8 @@
 class SellPointOffersController < AdminController
   before_action :set_sell_point_offer, only: [:show, :edit, :update, :destroy]
+  before_action :set_sell_point, except: [:destroy, :show]
 
   def index
-    @sell_point = SellPoint.find(params[:sell_point_id])
     @offers = @sell_point.sell_point_offers
   end
 
@@ -10,18 +10,14 @@ class SellPointOffersController < AdminController
   end
 
   def new
-    @sell_point = SellPoint.find(params[:sell_point_id])
-    @offer = SellPointOffer.new(sell_point: @sell_point)
+    @offer = SellPointOffer.new(sell_point_id: params[:sell_point_id])
   end
 
   def edit
-    @sell_point = SellPoint.find(params[:sell_point_id])
-    @offer = SellPointOffer.find(params[:id])
     @offer.sell_point = @sell_point
   end
 
   def create
-    @sell_point = SellPoint.find(params[:sell_point_id])
     @offer = SellPointOffer.new(sell_point_offer_params)
     @offer.sell_point_id = @sell_point.id
       if @offer.save
@@ -34,7 +30,6 @@ class SellPointOffersController < AdminController
   end
 
   def update
-    @sell_point = SellPoint.find(params[:sell_point_id])
       if @offer.update(sell_point_offer_params)
         flash[:success] = 'Sell point offer was successfully updated.'
         redirect_to sell_point_offers_path(sell_point_id: @offer.sell_point_id)
@@ -45,8 +40,8 @@ class SellPointOffersController < AdminController
   end
 
   def destroy
-    @sell_point = SellPoint.find(params[:sell_point_id])
     @offer.destroy
+    flash[:success] = 'Sell point offer was successfully deleted.'
     redirect_to sell_point_offers_path(sell_point_id: @offer.sell_point_id)
   end
 
@@ -54,6 +49,10 @@ class SellPointOffersController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_sell_point_offer
       @offer = SellPointOffer.find(params[:id])
+    end
+
+    def set_sell_point
+      @sell_point = SellPoint.find(params[:sell_point_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,7 +1,9 @@
-%h1 Editing sell_point_offer
+%h3 
+  Offer for 
+  =@sell_point.name
 
-= render 'form'
+%div{style:'margin-top:20px;'}
+  = form_for @offer, url: sell_point_offer_path(id: @offer.id, sell_point_id: @sell_point.id) do |f|
+    = render 'form', f: f
 
-= link_to 'Show', @sell_point_offer
-\|
-= link_to 'Back', sell_point_offers_path
+= link_to 'Back', {action: :index}

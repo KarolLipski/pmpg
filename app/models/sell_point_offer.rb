@@ -16,4 +16,5 @@ class SellPointOffer < ActiveRecord::Base
 
   validates_presence_of :start_date, :end_date, :price
   validates_numericality_of :price
+  validates_format_of :start_date, :end_date, with: /[0-9]{4}-[0-9]{2}-[0-9]{2}/
 end

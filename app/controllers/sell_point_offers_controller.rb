@@ -6,68 +6,58 @@ class SellPointOffersController < AdminController
     @offers = @sell_point.sell_point_offers
   end
 
-  # GET /sell_point_offers/1
-  # GET /sell_point_offers/1.json
   def show
   end
 
-  # GET /sell_point_offers/new
   def new
-    @sell_point_offer = SellPointOffer.new
+    @sell_point = SellPoint.find(params[:sell_point_id])
+    @offer = SellPointOffer.new(sell_point: @sell_point)
   end
 
-  # GET /sell_point_offers/1/edit
   def edit
+    @sell_point = SellPoint.find(params[:sell_point_id])
+    @offer = SellPointOffer.find(params[:id])
+    @offer.sell_point = @sell_point
   end
 
-  # POST /sell_point_offers
-  # POST /sell_point_offers.json
   def create
-    @sell_point_offer = SellPointOffer.new(sell_point_offer_params)
-
-    respond_to do |format|
-      if @sell_point_offer.save
-        format.html { redirect_to @sell_point_offer, notice: 'Sell point offer was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @sell_point_offer }
+    @sell_point = SellPoint.find(params[:sell_point_id])
+    @offer = SellPointOffer.new(sell_point_offer_params)
+    @offer.sell_point_id = @sell_point.id
+      if @offer.save
+        flash[:success] = 'Sell point offer was successfully created.'
+        redirect_to sell_point_offers_path(sell_point_id: @offer.sell_point_id)
       else
-        format.html { render action: 'new' }
-        format.json { render json: @sell_point_offer.errors, status: :unprocessable_entity }
+        flash.now[:error] = 'You have errors in your form , check it.'
+        render action: 'new' 
       end
-    end
   end
 
-  # PATCH/PUT /sell_point_offers/1
-  # PATCH/PUT /sell_point_offers/1.json
   def update
-    respond_to do |format|
-      if @sell_point_offer.update(sell_point_offer_params)
-        format.html { redirect_to @sell_point_offer, notice: 'Sell point offer was successfully updated.' }
-        format.json { head :no_content }
+    @sell_point = SellPoint.find(params[:sell_point_id])
+      if @offer.update(sell_point_offer_params)
+        flash[:success] = 'Sell point offer was successfully updated.'
+        redirect_to sell_point_offers_path(sell_point_id: @offer.sell_point_id)
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @sell_point_offer.errors, status: :unprocessable_entity }
+        flash.now[:error] = 'You have errors in your form , check it.'
+        render action: 'edit' 
       end
-    end
   end
 
-  # DELETE /sell_point_offers/1
-  # DELETE /sell_point_offers/1.json
   def destroy
-    @sell_point_offer.destroy
-    respond_to do |format|
-      format.html { redirect_to sell_point_offers_url }
-      format.json { head :no_content }
-    end
+    @sell_point = SellPoint.find(params[:sell_point_id])
+    @offer.destroy
+    redirect_to sell_point_offers_path(sell_point_id: @offer.sell_point_id)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sell_point_offer
-      @sell_point_offer = SellPointOffer.find(params[:id])
+      @offer = SellPointOffer.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sell_point_offer_params
-      params[:sell_point_offer]
+      params.require(:sell_point_offer).permit(:offer_id, :start_date, :end_date, :price)
     end
 end

@@ -33,4 +33,13 @@ describe SellPointOffer do
   it "is valid with fload price" do
     FactoryGirl.build(:sell_point_offer, price: 10.34).should be_valid
   end
+  it "is invalid witd bad start date format" do
+    FactoryGirl.build(:sell_point_offer, start_date: 'asd').should_not be_valid
+  end
+  it "is invalid witd bad end date format" do
+    FactoryGirl.build(:sell_point_offer, start_date: 'asd').should_not be_valid
+  end
+  it "is valid with proper start date" do
+    FactoryGirl.build(:sell_point_offer, start_date: '2012-01-03').should be_valid
+  end
 end

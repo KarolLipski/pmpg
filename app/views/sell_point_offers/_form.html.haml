@@ -1,10 +1,22 @@
-= form_for @sell_point_offer do |f|
-  - if @sell_point_offer.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@sell_point_offer.errors.count, "error")} prohibited this sell_point_offer from being saved:"
-      %ul
-        - @sell_point_offer.errors.full_messages.each do |msg|
-          %li= msg
 
-  .actions
-    = f.submit 'Save'
+%fieldset
+  = f.label :offer
+  = error_for_field(f.object, :offer)
+  = f.collection_select(:offer_id,Offer.order(:id),:id, :name)
+
+  = f.label :start_date, 'Start date (example: 2012-01-01)'
+  = error_for_field(f.object, :start_date)
+  = f.text_field :start_date
+
+  = f.label :end_date, 'End date (example: 2012-01-01)'
+  = error_for_field(f.object, :end_date)
+  = f.text_field :end_date
+
+  = f.label :price
+  = error_for_field(f.object, :price)
+  = f.text_field :price
+
+
+
+.actions
+  = f.submit 'Save', class: 'btn btn-large btn-success', style: 'margin-top:10px;'

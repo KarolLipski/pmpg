@@ -7,6 +7,9 @@
 #  sell_point_id :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  price         :decimal(, )
+#  start_date    :date
+#  end_date      :date
 #
 
 class SellPointOffer < ActiveRecord::Base

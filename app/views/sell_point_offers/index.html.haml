@@ -13,7 +13,7 @@
         %th Offer Name
         %th Start Date
         %th End Date
-        %th Titles Count
+        / %th Titles Count
         %th Price
         %th Actions
     %tbody
@@ -22,7 +22,7 @@
           %td= offer.offer.name
           %td= offer.start_date
           %td= offer.end_date
-          %td
+          / %td
           %td= offer.price
           %td
             = link_to 'Edit', {action: :edit, id: offer}, class: 'btn btn-mini btn-primary'

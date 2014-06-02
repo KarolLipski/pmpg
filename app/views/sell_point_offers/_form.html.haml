@@ -15,6 +15,17 @@
   = f.label :price
   = error_for_field(f.object, :price)
   = f.text_field :price
+%hr
+%h3
+  Additional Titles
+
+%div{class: 'checkbox_container'}
+  = f.fields_for :additional_titles do |ff|
+    %div{class: 'outside_checker'}
+      = ff.check_box :_destroy, {checked: ff.object.persisted? || ff.object.quantity != 0},'0','1'
+      = ff.hidden_field :title_id
+      = ff.text_field :quantity, style:'width:25px'
+      = ff.label :quantity , ff.object.title.title
 
 
 

@@ -51,4 +51,4 @@
 //= require addresses.js
 //= require tables.js
 //= require common.js
-
+//= require sell_point_offers.js

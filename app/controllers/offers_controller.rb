@@ -6,6 +6,10 @@ class OffersController < AdminController
   end
 
   def show
+    respond_to do |format|
+      format.json { render json: @offer}
+      format.html {}
+    end
   end
 
   # GET /offers/new

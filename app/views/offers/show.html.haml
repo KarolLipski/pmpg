@@ -1,5 +1,6 @@
 %p#notice= notice
-
+=@o.inspect
+=@z.inspect
 %p
   %b Name:
   = @offer.name
@@ -9,6 +10,20 @@
 %p
   %b Price:
   = @offer.price
+
+%h2
+  Tytuły dostarczane regularnie:
+- @z.each  do |rodzaj, ot|
+  %h4=rodzaj
+  - count = 1
+  - ot['titles'].each do |title|
+    %p
+      ="#{count}. "
+      = title.title.title
+      %span{style: 'margin-left:50px;'}
+        = title.quantity
+      - count = count + 1
+    %br
 
 = link_to 'Edit', edit_offer_path(@offer)
 \|

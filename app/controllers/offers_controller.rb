@@ -8,7 +8,22 @@ class OffersController < AdminController
   def show
     respond_to do |format|
       format.json { render json: @offer}
-      format.html {}
+      format.html do
+        @o = Offer.includes(titles:[:title_frequency])
+          .order('title_frequencies.id').find(4)
+        @z = {}
+        @o.offer_titles.each do |ot|
+          if @z[ot.title.title_frequency.name]
+            @z[ot.title.title_frequency.name]['titles'].push(ot)
+          else
+            titles = []
+            titles.push(ot)
+            @z[ot.title.title_frequency.name] = {}
+            @z[ot.title.title_frequency.name]['titles'] = titles
+          end
+        end
+
+      end
     end
   end
 

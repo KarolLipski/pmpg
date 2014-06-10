@@ -15,7 +15,7 @@
       - @offers.each do |offer|
         %tr
           %td
-            = link_to offer.name, offers_path(offer) 
+            = link_to offer.name, offer_path(offer) 
           %td= offer.price
           %td
             = link_to 'Edit', {action: :edit, id: offer}, class: 'btn btn-mini btn-primary'

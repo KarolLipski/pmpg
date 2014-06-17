@@ -1,28 +1,18 @@
 class OffersController < AdminController
-  before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :set_offer, only: [:edit, :update, :destroy]
 
   def index
     @offers = Offer.all
   end
 
   def show
+    @offer = Offer.includes(titles:[:title_frequency])
+      .order('title_frequencies.id').find(params[:id])
     respond_to do |format|
       format.json { render json: @offer}
       format.html do
-        @o = Offer.includes(titles:[:title_frequency])
-          .order('title_frequencies.id').find(4)
-        @z = {}
-        @o.offer_titles.each do |ot|
-          if @z[ot.title.title_frequency.name]
-            @z[ot.title.title_frequency.name]['titles'].push(ot)
-          else
-            titles = []
-            titles.push(ot)
-            @z[ot.title.title_frequency.name] = {}
-            @z[ot.title.title_frequency.name]['titles'] = titles
-          end
-        end
-
+        offer_pdf = PdfCreation::OfferPdf.new
+        @titles = offer_pdf.titles(@offer)
       end
     end
   end

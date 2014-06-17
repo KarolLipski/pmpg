@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+  %title RailsWickedPdf
+  %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8' }
+  = wicked_pdf_stylesheet_link_tag    "offer_pdf", :media => "all"
+  = wicked_pdf_javascript_include_tag "application"
+  = csrf_meta_tags
+  %body
+    = yield

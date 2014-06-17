@@ -13,6 +13,15 @@ class OffersController < AdminController
       format.html do
         offer_pdf = PdfCreation::OfferPdf.new
         @titles = offer_pdf.titles(@offer)
+        render layout: false
+      end
+      format.pdf do
+        offer_pdf = PdfCreation::OfferPdf.new
+        @titles = offer_pdf.titles(@offer)
+        render :pdf => 'offer', layout: 'pdf.html.haml',:margin => {:top => 0,
+                           :bottom => 0,
+                           :left   => 0,
+                           :right  => 0}
       end
     end
   end

@@ -1,7 +1,7 @@
-%h2
+%h4
   Tytuły dostarczane regularnie:
 - @titles.each  do |frequency, ot|
-  %h4=frequency
+  %h5=frequency
   - count = 1
   - ot.each do |title|
     %p
@@ -11,6 +11,3 @@
         = title.quantity
       - count = count + 1
 
-= link_to 'Edit', edit_offer_path(@offer)
-\|
-= link_to 'Back', offers_path

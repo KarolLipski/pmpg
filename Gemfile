@@ -58,6 +58,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
